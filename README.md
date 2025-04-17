@@ -1,2 +1,2 @@
 # ui-final
-Brush Techniques in Procreate
+Brush techniques in Procreate
