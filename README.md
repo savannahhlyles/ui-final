@@ -1,2 +1,2 @@
 # User Interface Design Final Project
-Digital Art: Brush Techniques in Procreate
+Brush Up: Brush Techniques in Procreate
