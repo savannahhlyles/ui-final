@@ -6,7 +6,7 @@ app = Flask(__name__)
 questions = [
     {"id": 1, "text": "Which brush is used in the shown clip?", "options": ["Narinder Pencil", "Peppermint", "6B Pencil", "Oil Pastel"], "answer": "Oil Pastel"},
     {"id": 2, "text": "Fill in the blanks using the word bank to complete the statements.", "options": [], "answer": ""},
-    {"id": 3, "text": "Which brush is best for light, initial construction lines before adding detail?", "options": [], "answer": ""},
+    {"id": 3, "text": "Which brush is best for light, initial construction lines before adding detail?", "options": ["Narinder Pencil", "6B Pencil", "HB Pencil", "Procreate Pencil"], "answer": "HB Pencil"},
     {"id": 4, "text": "Match each scenario to the most suitable brush for the task.", "options": [], "answer": ""},
     {"id": 5, "text": "You’re sketching a rough pose and want the brush to respond well to tilt for expressive lines. Which brush do you choose?", "options": [], "answer": ""},
     {"id": 6, "text": "Identify the brush used for this sketch.", "options": [], "answer": ""},
