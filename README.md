@@ -1,2 +1,2 @@
-# User Interface Design Final Project
-Digital Art: Brush Techniques in Procreate
+# COMS W4170 Final Project
+Brush Up: Brush Techniques in Procreate
