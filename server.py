@@ -1,8 +1,18 @@
-from flask import Flask
-from flask import render_template
-from flask import Response, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response, url_for
+
 app = Flask(__name__)
 
+# Brush data for the Learn page
+brushes = [
+    {"id": 1, "name": "HB Pencil", "img": "hb_pencil.png"},
+    {"id": 2, "name": "Oil Pastel", "img": "oil.png"},
+    {"id": 3, "name": "Procreate Pencil", "img": "procreate_pencil.png"},
+    {"id": 4, "name": "Narinder Pencil", "img": "narinder.png"},
+    {"id": 5, "name": "6B Pencil", "img": "6b.png"},
+    {"id": 6, "name": "Peppermint", "img": "peppermint.png"},
+]
+
+# Quiz questions
 questions = [
     {"id": 1, "text": "Which brush is used in the shown clip?", "options": ["Narinder Pencil", "Peppermint", "6B Pencil", "Oil Pastel"], "answer": "Oil Pastel"},
     {"id": 2, "text": "Fill in the blanks using the word bank to complete the statements.", "options": [], "answer": ""},
@@ -13,30 +23,40 @@ questions = [
 ]
 
 # ROUTES
-
 @app.route('/')
 def default():
-   return render_template('home.html')   
+    return render_template('home.html')
 
 @app.route('/learn')
 def learn():
-   return render_template('learn.html')   
+    # Build brush entries with full static URLs and link endpoints
+    brush_data = []
+    for b in brushes:
+        b_copy = b.copy()
+        # static media folder path
+        b_copy['src'] = url_for('static', filename=f"media/{b['img']}")
+        # link to view page
+        b_copy['link'] = url_for('view_brush', brush_id=b['id'])
+        brush_data.append(b_copy)
+    return render_template('learn.html', brushes=brush_data)
 
 @app.route('/view_brush/<int:brush_id>')
 def view_brush(brush_id):
-   return render_template('viewbrush.html')
+    brush = next((b for b in brushes if b['id'] == brush_id), None)
+    return render_template('viewbrush.html', brush=brush)
 
 @app.route('/quiz')
 def quiz():
-   return render_template('quiz.html')   
+    return render_template('quiz.html', questions=questions)
 
 @app.route('/view_question/<int:question_id>')
 def view_question(question_id):
-   return render_template('viewquestion.html')   
+    question = next((q for q in questions if q['id'] == question_id), None)
+    return render_template('viewquestion.html', question=question)
 
 @app.route('/procreate')
 def procreate():
-   return render_template('procreate.html')   
+    return render_template('procreate.html')
 
-if __name__ == '__main__':
-   app.run(debug = True, port=5001)
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)
