@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="container py-5" id="question-root"></div>
+
+  <script>
+    // these two globals come from Flask
+    const question      = {{ question  | tojson }};
+    const totalQuestions = {{ total }};
+  </script>
+
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='quiz.js') }}"></script>
+{% endblock %}
