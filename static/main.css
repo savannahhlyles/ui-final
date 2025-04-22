@@ -1,0 +1,24 @@
+/* center everything inside #quiz-root horizontally */
+#quiz-root {
+    text-align: center;
+  }
+  
+  /* make the ipad-container an inline‑block and nudge it right */
+  #ipad-container {
+    position: relative;       /* still needed for the overlay */
+    display: inline-block;    /* shrink‑wrap around the image */
+    margin-left: 50px;        /* ← tweak this to move right/left */
+  }
+  
+  /* size the image */
+  #ipad-container img {
+    width: 800px;             /* or whatever size you like */
+    height: auto;
+  }
+  
+  /* space the Review button */
+  #review {
+    display: block;
+    margin: 1.5em auto 0;
+  }
+  

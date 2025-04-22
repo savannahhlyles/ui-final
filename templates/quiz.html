@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
+  <!-- mount point for our quiz UI -->
+  <div id="quiz-root"></div>
 
-<b>Quiz</b>
+  <!-- jQuery (make sure this matches your version) -->
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"></script>
 
+  <!-- your dynamic quiz builder -->
+  <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 {% endblock %}
