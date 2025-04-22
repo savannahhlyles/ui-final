@@ -4,15 +4,17 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="data:,">
 
-    <!-- jQuery & jQuery UI -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>  
+    <!-- Favicon fallback (this is a data URI placeholder) -->
+    <link rel="icon" href="data:," />
+
+    <!-- jQuery & jQuery UI (Use latest stable versions unless compatibility is required) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS (Consider upgrading to v4.6 or v5.x if possible) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-..." crossorigin="anonymous">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
@@ -37,9 +39,12 @@
       </div>
     </nav>
 
-    <div class="container mt-4">   
+    <div class="container mt-4">
       {% block content %}{% endblock %}
     </div>
+
+    <!-- Bootstrap JS (required for navbar toggle) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.bundle.min.js" integrity="sha384-..." crossorigin="anonymous"></script>
 
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
