@@ -96,6 +96,7 @@ def view_brush(brush_id):
 
 @app.route('/quiz')
 def quiz():
+    # start screen only
     return render_template('quiz.html')
 
 @app.route('/questions/<int:question_id>')
@@ -103,11 +104,40 @@ def questions_page(question_id):
     q = next((q for q in questions if q['id'] == question_id), None)
     if not q:
         return "Question not found", 404
-    return render_template(
-        'questions.html',
-        question=q,
-        total=len(questions)
-    )
+    return render_template('questions.html', question=q, total=len(questions))
+
+@app.route('/submit_quiz', methods=['POST'])
+def submit_quiz():
+    data = request.get_json(force=True)
+    user_answers = data.get('answers', {})
+    total = len(questions)
+    score = 0
+    summary = []
+
+    for q in questions:
+        qid = str(q['id'])
+        ua = user_answers.get(qid)
+        correct = False
+        if q['type'] == 'multiple_choice':
+            correct = (ua == q['answer'])
+        else:
+            correct = isinstance(ua, dict) and all(
+                ua.get(k) == v for k, v in q['answer'].items()
+            )
+        if correct:
+            score += 1
+        summary.append({
+            'id': q['id'],
+            'text': q['text'],
+            'your_answer': ua,
+            'correct_answer': q['answer'],
+            'correct': correct
+        })
+
+    return render_template('quizresults.html',
+                           score=score,
+                           total=total,
+                           summary=summary)
 
 @app.route('/procreate')
 def procreate():
