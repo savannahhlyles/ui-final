@@ -1,7 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
+  <!-- empty mount point -->
+  <div id="home-root"></div>
 
-<b>Home</b>
-
+  <!-- jQuery (if not already loaded in layout.html) -->
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJ+YrfTKfHj+6DU6l7xbr7vz2D+6vAChs1iqY="
+    crossorigin="anonymous"></script>
+  <!-- your dynamic builder -->
+  <script src="{{ url_for('static', filename='functions.js') }}"></script>
 {% endblock %}
