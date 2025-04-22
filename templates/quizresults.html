@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="container py-5">
+    <h1>Your Score: {{ score }}/{{ total }}</h1>
+    <hr>
+    <h3>Quiz Summary</h3>
+    <ul class="list-group mb-4">
+      {% for q in summary %}
+        <li class="list-group-item {% if q.correct %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
+          <strong>{{ q.id }}. {{ q.text }}</strong><br>
+          <em>Your answer:</em> {{ q.your_answer }}<br>
+          <em>Correct answer:</em> {{ q.correct_answer }}
+        </li>
+      {% endfor %}
+    </ul>
+    <div class="d-flex gap-3">
+      <a href="{{ url_for('quiz') }}" class="btn btn-primary">Retake Quiz</a>
+      <a href="{{ url_for('learn') }}" class="btn btn-secondary">Review Brushes</a>
+      <a href="{{ url_for('procreate') }}" class="btn btn-info">Explore Procreate</a>
+    </div>
+  </div>
+{% endblock %}
