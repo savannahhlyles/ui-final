@@ -1,38 +1,106 @@
 {% extends "layout.html" %}
 
+{% block head %}
+  {{ super() }}
+  <style>
+    /* Overall container */
+    .view-container {
+      padding: 2rem;
+      background: #f6f2ec;
+    }
+    /* Left column: preview */
+    .preview-card img {
+      cursor: move;
+      max-width: 100%;
+    }
+    /* Center column: drop area */
+    .drop-zone {
+      position: relative;
+      width: 100%;
+      padding-top: 100%; /* 1:1 aspect ratio */
+      border: 2px dashed #333;
+      background: #fff;
+      transition: background .2s, border-color .2s;
+    }
+    .drop-zone.highlight {
+      background: #e7f1ff;
+      border-color: #007bff;
+    }
+    .drop-zone > img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+    }
+    /* Right column: tips */
+    .tips {
+      display: none;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .tips.visible {
+      display: flex;
+    }
+    .tip {
+      background: #ccc;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      color: #111;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
-<div class="py-4" style="background-color:#f6f2ec; min-height:100vh;">
-  <div class="row align-items-start">
-    <!-- Left panel: brush card + description -->
-    <div class="col-md-4">
-      <div class="card bg-dark text-light rounded-lg shadow-sm border-0 mb-4">
-        <div class="card-body p-3">
-          <h5 class="card-title">{{ brush.name }}</h5>
-          <img src="{{ url_for('static', filename='media/' ~ brush.img) }}"
-               alt="{{ brush.name }}"
-               class="img-fluid mt-2 mb-2"
-               style="width:100%; object-fit:contain;">
-        </div>
-      </div>
-      <div class="p-4 bg-secondary text-dark rounded-lg mb-4">
-        <p class="m-0">{{ brush.description }}</p>
-      </div>
-      <div class="d-flex justify-content-between">
-        <a href="{{ url_for('learn') }}" class="btn btn-light btn-lg shadow">RETURN TO LEARN</a>
-        <button id="next-btn" class="btn btn-light btn-lg shadow">NEXT</button>
+<div class="container-fluid view-container">
+  <div class="row">
+    <!-- Left: Brush preview + description -->
+    <div class="col-md-3 preview-card text-center">
+      <h4>{{ brush.name }}</h4>
+      <img
+        id="draggable"
+        src="{{ url_for('static', filename='media/' ~ brush.img) }}"
+        alt="{{ brush.name }}"
+        data-reveal-url="{{ url_for('static', filename='media/' ~ brush.reveal_img) }}"
+      >
+      <p class="mt-3">{{ brush.description }}</p>
+    </div>
+
+    <!-- Center: Drop-to-reveal -->
+    <div class="col-md-6 text-center">
+      <h2>Explore the Sketch</h2>
+      <div id="droppable" class="drop-zone mt-3 mb-3">
+        <p style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+          Drop here to reveal
+        </p>
       </div>
     </div>
 
-    <!-- Right panel: interactive sketch area -->
-    <div class="col-md-8">
-      <h2 class="font-weight-bold">Drag the Pencil to Unlock Sketch</h2>
-      <div id="sketch-area" class="border" style="width:100%; height:400px; background-color:#fff; position:relative; margin-bottom:20px;">
-        <!-- Canvas placeholder -->
+    <!-- Right: Tips (hidden until drop) -->
+    <div class="col-md-3">
+      <div id="tips" class="tips">
+        <div class="tip">Use for Painterly Texture and Blending</div>
+        <div class="tip">Build Up Color in Layers</div>
+        <div class="tip">Try Smudging for a Blended Look</div>
       </div>
-      <img id="drag-pencil" src="{{ url_for('static', filename='media/pencil.jpeg') }}"
-           alt="Apple Pencil"
-           style="height:200px; cursor:grab; position:relative;">
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="row mt-4">
+    <div class="col text-left">
+      <a href="{{ url_for('learn') }}" class="btn btn-light btn-lg shadow">← Back</a>
+    </div>
+    <div class="col text-right">
+      {% if next_brush_id %}
+        <a href="{{ url_for('view_brush', brush_id=next_brush_id) }}"
+           class="btn btn-light btn-lg shadow">Next Brush →</a>
+      {% endif %}
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
 {% endblock %}

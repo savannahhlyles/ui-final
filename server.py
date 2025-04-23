@@ -1,24 +1,22 @@
-from flask import Flask, render_template, request, jsonify, Response, url_for
+from flask import Flask, render_template, request, abort
 
 app = Flask(__name__)
 
 # Application title
-title = "Brush Strokes Digital Art"
+TITLE = "Brush Strokes Digital Art"
 
 @app.context_processor
-
 def inject_title():
-    return {'title': title}
+    return {'title': TITLE}
 
 # Brush definitions including description for view page
-title = "Brush Strokes Digital Art"
 brushes = [
-    {"id": 1, "name": "HB Pencil",              "img": "hb_pencil.png",      "description": "The HB brush is ideal for sketching due to its natural, pressure-sensitive feel, like a traditional pencil."},
-    {"id": 2, "name": "Oil Pastel",            "img": "oil.png",     "description": "Oil Pastel offers smooth blending and vibrant color transitions, mimicking traditional pastel textures."},
-    {"id": 3, "name": "Procreate Pencil","img": "procreate_pencil.png","description": "Procreate Pencil delivers crisp, precise lines perfect for detailed work and fine shading."},
-    {"id": 4, "name": "Narinder Pencil",  "img": "narinder.png", "description": "Narinder Pencil excels at light construction lines and initial form blocking."},
-    {"id": 5, "name": "6B Pencil",              "img": "6b.png",      "description": "6B Pencil provides dark, expressive strokes with rich graphite texture for dramatic shading."},
-    {"id": 6, "name": "Peppermint",            "img": "peppermint.png",     "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes."},
+    {"id": 1, "name": "HB Pencil",           "img": "hb_pencil.png",      "description": "The HB brush is ideal for sketching due to its natural, pressure-sensitive feel, like a traditional pencil."},
+    {"id": 2, "name": "Oil Pastel",         "img": "oil.png",             "description": "Oil Pastel offers smooth blending and vibrant color transitions, mimicking traditional pastel textures."},
+    {"id": 3, "name": "Procreate Pencil",   "img": "procreate_pencil.png", "description": "Procreate Pencil delivers crisp, precise lines perfect for detailed work and fine shading."},
+    {"id": 4, "name": "Narinder Pencil",    "img": "narinder.png",        "description": "Narinder Pencil excels at light construction lines and initial form blocking."},
+    {"id": 5, "name": "6B Pencil",          "img": "6b.png",             "description": "6B Pencil provides dark, expressive strokes with rich graphite texture for dramatic shading."},
+    {"id": 6, "name": "Peppermint",         "img": "peppermint.png",     "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes."},
 ]
 
 # Quiz questions
@@ -36,9 +34,9 @@ questions = [
         "text": "Fill in the blanks using the word bank to complete the statements.",
         "sentences": [
             {"text": "The Peppermint brush offers <div id='blank1' class='drop-zone'></div> making it great for rougher-style sketching.", "drop_id": "blank1"},
-            {"text": "While using the Peppermint brush, use <div id='blank2' class='drop-zone'></div> for shading.",            "drop_id": "blank2"},
-            {"text": "The Narinder Pencil is used for <div id='blank3' class='drop-zone'></div> lines.",                     "drop_id": "blank3"},
-            {"text": "The Oil Pastel is used for <div id='blank4' class='drop-zone'></div> lines.",                       "drop_id": "blank4"}
+            {"text": "While using the Peppermint brush, use <div id='blank2' class='drop-zone'></div> for shading.", "drop_id": "blank2"},
+            {"text": "The Narinder Pencil is used for <div id='blank3' class='drop-zone'></div> lines.", "drop_id": "blank3"},
+            {"text": "The Oil Pastel is used for <div id='blank4' class='drop-zone'></div> lines.", "drop_id": "blank4"}
         ],
         "options": ["clean", "texture", "smudgy", "tilt"],
         "answer": {"blank1": "texture", "blank2": "tilt", "blank3": "clean", "blank4": "smudgy"}
@@ -80,7 +78,6 @@ questions = [
 ]
 
 # ROUTES
-
 @app.route('/')
 def default():
     return render_template('home.html')
@@ -91,12 +88,20 @@ def learn():
 
 @app.route('/view_brush/<int:brush_id>')
 def view_brush(brush_id):
-    brush = next((b for b in brushes if b['id'] == brush_id), None)
-    return render_template('viewbrush.html', brush=brush)
+    # find index of current brush
+    idx = next((i for i, b in enumerate(brushes) if b['id'] == brush_id), None)
+    if idx is None:
+        abort(404)
+    # calculate next brush id if available
+    next_brush_id = brushes[idx+1]['id'] if idx < len(brushes)-1 else None
+    return render_template(
+        'viewbrush.html',
+        brush=brushes[idx],
+        next_brush_id=next_brush_id
+    )
 
 @app.route('/quiz')
 def quiz():
-    # start screen only
     return render_template('quiz.html')
 
 @app.route('/questions/<int:question_id>')
@@ -117,7 +122,6 @@ def submit_quiz():
     for q in questions:
         qid = str(q['id'])
         ua = user_answers.get(qid)
-        correct = False
         if q['type'] == 'multiple_choice':
             correct = (ua == q['answer'])
         else:
@@ -134,14 +138,11 @@ def submit_quiz():
             'correct': correct
         })
 
-    return render_template('quizresults.html',
-                           score=score,
-                           total=total,
-                           summary=summary)
+    return render_template('quizresults.html', score=score, total=total, summary=summary)
 
 @app.route('/procreate')
 def procreate():
     return render_template('procreate.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5004)

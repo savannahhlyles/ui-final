@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="py-4" style="background-color:#f6f2ec;">
+
   <!-- Page Header -->
   <div class="text-center mb-4">
     <h1 class="font-weight-bold">CHOOSE A BRUSH</h1>
@@ -11,16 +12,17 @@
          style="max-width:200px;">
   </div>
 
-  <!-- Brush Grid -->
+  <!-- Brush Grid: 3-per-row on md+, 2-per on sm, 1-per on xs -->
   <div class="row">
-    {% for brush in brushes %}
-      <div class="col-md-6 mb-4">
-        <a href="{{ url_for('view_brush', brush_id=brush.id) }}" class="d-block text-decoration-none">
+    {% for b in brushes %}
+      <div class="col-12 col-sm-6 col-md-4 mb-4">
+        <a href="{{ url_for('view_brush', brush_id=b.id) }}"
+           class="d-block text-decoration-none">
           <div class="card bg-dark text-light rounded-lg shadow-sm border-0">
-            <div class="card-body p-3">
-              <h5 class="card-title">{{ brush.name }}</h5>
-              <img src="{{ url_for('static', filename='media/' ~ brush.img) }}"
-                   alt="{{ brush.name }}"
+            <div class="card-body p-3 text-center">
+              <h5 class="card-title">{{ b.name }}</h5>
+              <img src="{{ url_for('static', filename='media/' ~ b.img) }}"
+                   alt="{{ b.name }}"
                    class="img-fluid mt-2"
                    style="max-height:100px; object-fit:contain;">
             </div>
@@ -32,8 +34,8 @@
 
   <!-- Navigation Buttons -->
   <div class="d-flex justify-content-between mt-4">
-    <a href="{{ url_for('default') }}" class="btn btn-light btn-lg shadow">RETURN HOME</a>
-    <a href="{{ url_for('quiz') }}" class="btn btn-light btn-lg shadow">QUIZ</a>
+    <a href="{{ url_for('default') }}" class="btn btn-light btn-lg shadow">← Home</a>
+    <a href="{{ url_for('quiz') }}"    class="btn btn-light btn-lg shadow">Quiz Yourself</a>
   </div>
 </div>
 {% endblock %}
