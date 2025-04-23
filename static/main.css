@@ -1,0 +1,45 @@
+.big-bold{
+    font-weight: bold;
+    color: #000000;
+    font-size: 2.5rem;
+}
+
+.bordered{
+    background: #cacaca;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    margin-top:50px;
+}
+
+.slide{
+    margin-top: 50px;
+    width: 200px;
+    position: relative;
+}
+
+
+.cyan-box {
+        position: absolute;
+
+        width: 100px;
+        height: 100px;
+        border: 3px solid cyan;
+        border-radius: 10px;
+        pointer-events: none;
+        z-index: 2
+}
+
+.btn-link {
+    display: inline-block;
+    background-color: grey;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+.btn-link:hover {
+    background-color: #5a5a5a;
+}

@@ -2,6 +2,17 @@
 
 {% block content %}
 
-<b>Procreate</b>
+    <div class = "container d-flex justify-content-center align-items-center" id="interface-root"></div>
+    <a href="/quiz" class="btn-link">Go To Quiz</a>
+     <!-- jQuery (make sure this matches your version) -->
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    crossorigin="anonymous"></script>
 
+  <!-- your dynamic quiz builder -->
+  <script src="{{ url_for('static', filename='functions.js') }}"></script>
+
+    <script>
+        let loaded_slide = {{ slide | tojson }};
+     </script>
 {% endblock %}

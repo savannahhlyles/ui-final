@@ -21,6 +21,16 @@ brushes = [
     {"id": 6, "name": "Peppermint",            "img": "peppermint.png",     "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes."},
 ]
 
+# Procreate Interface Structure
+
+procreate_slides = [
+        {"id": 1, "title": "Navigating the Procreate Interface","img": "slide1.png","boxx": 15,"boxy": 65},
+        {"id": 2, "title": "Click on the Plus & Select a Canvas","img": "slide2.png","boxx": 13,"boxy": 69},
+        {"id": 3, "title": "Explore Brushes & Click Sketching","img": "slide3.png","boxx": 13,"boxy": 60},
+        {"id": 4, "title": "Change Size","img": "slide4.png","boxx":40 ,"boxy": 22},
+        {"id": 5, "title": "Change Opacity","img": "slide5.png","boxx":60 ,"boxy": 22},
+]
+
 # Quiz questions
 questions = [
     {
@@ -108,10 +118,12 @@ def questions_page(question_id):
         question=q,
         total=len(questions)
     )
-
 @app.route('/procreate')
-def procreate():
-    return render_template('procreate.html')
+@app.route('/procreate/<int:slide_id>')
+def procreate(slide_id = 1):
+    slide = procreate_slides[slide_id-1]
+    print(slide)
+    return render_template('procreate.html', slide=slide)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
