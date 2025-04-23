@@ -1,106 +1,100 @@
 {% extends "layout.html" %}
 
-{% block head %}
-  {{ super() }}
-  <style>
-    /* Overall container */
-    .view-container {
-      padding: 2rem;
-      background: #f6f2ec;
-    }
-    /* Left column: preview */
-    .preview-card img {
-      cursor: move;
-      max-width: 100%;
-    }
-    /* Center column: drop area */
-    .drop-zone {
-      position: relative;
-      width: 100%;
-      padding-top: 100%; /* 1:1 aspect ratio */
-      border: 2px dashed #333;
-      background: #fff;
-      transition: background .2s, border-color .2s;
-    }
-    .drop-zone.highlight {
-      background: #e7f1ff;
-      border-color: #007bff;
-    }
-    .drop-zone > img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: contain;
-    }
-    /* Right column: tips */
-    .tips {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .tips.visible {
-      display: flex;
-    }
-    .tip {
-      background: #ccc;
-      padding: 0.75rem 1rem;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      color: #111;
-    }
-  </style>
-{% endblock %}
-
 {% block content %}
-<div class="container-fluid view-container">
-  <div class="row">
-    <!-- Left: Brush preview + description -->
-    <div class="col-md-3 preview-card text-center">
-      <h4>{{ brush.name }}</h4>
-      <img
-        id="draggable"
-        src="{{ url_for('static', filename='media/' ~ brush.img) }}"
-        alt="{{ brush.name }}"
-        data-reveal-url="{{ url_for('static', filename='media/' ~ brush.reveal_img) }}"
-      >
-      <p class="mt-3">{{ brush.description }}</p>
-    </div>
+<div class="py-4 bg-light" style="min-height:100vh;">
+  <div class="container">
+    <div class="row">
+      <!-- Left panel: brush info and navigation -->
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <img
+            src="{{ url_for('static', filename='media/' + brush.img) }}"
+            class="card-img-top"
+            alt="{{ brush.name }}"
+          >
+          <div class="card-body">
+            <h2 class="card-title">{{ brush.name }}</h2>
+            <p class="card-text">{{ brush.description }}</p>
+          </div>
+        </div>
 
-    <!-- Center: Drop-to-reveal -->
-    <div class="col-md-6 text-center">
-      <h2>Explore the Sketch</h2>
-      <div id="droppable" class="drop-zone mt-3 mb-3">
-        <p style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
-          Drop here to reveal
-        </p>
+        <div class="d-flex flex-column mt-3">
+          <a href="{{ url_for('learn') }}"
+             class="btn btn-primary btn-block mb-2">
+            ← Back to Learn
+          </a>
+          <a href="{{ url_for('view_brush', brush_id=(brush.id % 6) + 1) }}"
+             class="btn btn-secondary btn-block">
+            Next Brush →
+          </a>
+        </div>
       </div>
-    </div>
 
-    <!-- Right: Tips (hidden until drop) -->
-    <div class="col-md-3">
-      <div id="tips" class="tips">
-        <div class="tip">Use for Painterly Texture and Blending</div>
-        <div class="tip">Build Up Color in Layers</div>
-        <div class="tip">Try Smudging for a Blended Look</div>
+      <!-- Right panel: drag-and-drop demo + examples -->
+      <div class="col-md-8">
+        {% set slug = brush.name|lower|replace(' ', '_') %}
+
+        <!-- Demo mapping injected into the page -->
+        <script>
+          window.demoMap = {
+            {% set mapping = {
+              '6b_pencil': 'media/demos/6b_reveal.jpeg',
+              'hb_pencil': 'media/demos/hb_reveal.png',
+              'narinder_pencil': 'media/demos/Narinderpencil_reveal.png',
+              'oil_pastel': 'media/demos/OilPastel_Reveal .png',
+              'peppermint': 'media/demos/Peppermint_reveal.png',
+              'procreate_pencil': 'media/demos/procreatepencil_reveal.jpeg'
+            } %}
+            {% for key, path in mapping.items() %}
+              '{{ key }}': '{{ url_for("static", filename=path) }}'{{ "," if not loop.last }}
+            {% endfor %}
+          };
+        </script>
+
+        <!-- Drag & Drop Sketch Demo -->
+        <h3>Drag the Pencil to See a Sketch Demo</h3>
+        <div
+          id="sketch-area"
+          data-slug="{{ slug }}"
+          class="border bg-white position-relative mb-4"
+          style="height:300px;"
+        >
+          <div
+            id="placeholder"
+            class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center text-muted"
+          >
+            Drop the pencil here
+          </div>
+        </div>
+        <img
+          id="drag-pencil"
+          src="{{ url_for('static', filename='media/pencil.jpeg') }}"
+          alt="Pencil"
+          draggable="true"
+          style="height:100px; cursor:grab; margin-bottom:30px;"
+        >
+
+        <!-- Examples Gallery -->
+        <h3>Examples of "{{ brush.name }}" in Action</h3>
+        <div class="row" id="examples-gallery">
+          {% for i in [1,2,3] %}
+            {% set example_path = 'media/examples/' ~ slug ~ '_example' ~ i ~ '.jpg' %}
+            <div class="col-sm-6 col-lg-4 mb-4">
+              <div class="card shadow-sm">
+                <img
+                  src="{{ url_for('static', filename=example_path) }}"
+                  class="card-img-top"
+                  alt="Example {{ i }} of {{ brush.name }}"
+                  onerror="this.onerror=null;this.src='https://m.media-amazon.com/images/I/81JGNp4qcdL.jpg';"
+                >
+              </div>
+            </div>
+          {% endfor %}
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Navigation -->
-  <div class="row mt-4">
-    <div class="col text-left">
-      <a href="{{ url_for('learn') }}" class="btn btn-light btn-lg shadow">← Back</a>
-    </div>
-    <div class="col text-right">
-      {% if next_brush_id %}
-        <a href="{{ url_for('view_brush', brush_id=next_brush_id) }}"
-           class="btn btn-light btn-lg shadow">Next Brush →</a>
-      {% endif %}
     </div>
   </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
+<script src="{{ url_for('static', filename='viewbrush.js') }}" defer></script>
 {% endblock %}
