@@ -41,7 +41,7 @@
   }
 
   .navbar-brand:hover {
-    color: #76e0df;
+    color: #76e0df !important;
     transition: color 0.2s ease;
   }
   
