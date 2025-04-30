@@ -16,7 +16,7 @@ function buildHomeUI() {
       <!-- Top row: Text and Image -->
       <div class="row align-items-center">
         <div class="col-md-4">
-          <h1 class="display-4 fw-bold">Your guide to using sketching brushes in <span class="text-info">Procreate.</span></h1>
+          <h1 class="display-4 fw-bold">Your guide to using sketching brushes in <span class="highlight-word">Procreate.</span></h1>
           <p class="lead mt-4 text-muted">Master the art of selecting the perfect brush for every creative project.</p>
         </div>
 
@@ -29,7 +29,7 @@ function buildHomeUI() {
 <div class="row mt-4">
   <div class="col">
     <div class="d-flex justify-content-end pe-4">
-      <a href="/quiz" class="btn btn-accent btn-lg px-5">GET STARTED</a>
+    <a href="/learn" class="btn btn-accent px-5 btn-text-big">GET STARTED</a>
     </div>
   </div>
 </div>

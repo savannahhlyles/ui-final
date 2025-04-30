@@ -83,7 +83,7 @@
   }
   
   .btn-accent:hover {
-    background-color: #5ccbc8;
+    background-color: #76d7db;
     transform: translateY(-2px);
   }
   
@@ -97,3 +97,17 @@
   .d-flex.justify-content-end.pe-4 {
     padding-right: 4rem; /* match with navbar padding if needed */
   }
+
+
+  .btn-text-big {
+    font-size: 1.5rem;     /* just changes text size */
+    line-height: 1.1;        /* keeps height tight */
+    padding-top: 1rem;   /* optional: control top/bottom */
+    padding-bottom: 1rem;
+  }
+
+  .highlight-word {
+    color: #76d7db;  /* custom turquoise or any color */
+    font-weight: 350;
+  }
+  
