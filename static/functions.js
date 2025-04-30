@@ -29,7 +29,7 @@ function buildHomeUI() {
 <div class="row mt-4">
   <div class="col">
     <div class="d-flex justify-content-end pe-4">
-      <a href="/quiz" class="btn btn-accent btn-lg px-5">GET STARTED&nbsp;&rarr;</a>
+      <a href="/quiz" class="btn btn-accent btn-lg px-5">GET STARTED</a>
     </div>
   </div>
 </div>

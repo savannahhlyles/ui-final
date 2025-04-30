@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('/static/fonts/Poppins.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 #popup-message.show {
     display: block !important;
     opacity: 1;
@@ -7,7 +14,7 @@
 
   body {
     background-color: #f3efec; /* light beige tone */
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
   }
@@ -32,6 +39,11 @@
     margin-right: 28rem;
 
   }
+
+  .navbar-brand:hover {
+    color: #76e0df;
+    transition: color 0.2s ease;
+  }
   
   .navbar-nav .nav-link {
     color: #f5f5f5;
@@ -53,10 +65,10 @@
     height: auto;
   }
   .hero-image {
-    width: 120%;
-    max-width: none;
-    transform: scale(1.15);
-    margin-left: -5%;
+    width: 150%;
+    height: auto;
+    margin: 0 auto;
+    display: block;
   }
   .btn-accent {
     background-color: #76e0df;
@@ -85,6 +97,3 @@
   .d-flex.justify-content-end.pe-4 {
     padding-right: 4rem; /* match with navbar padding if needed */
   }
-
-      
-  
