@@ -13,18 +13,35 @@ $(document).ready(function() {
 function buildHomeUI() {
   $('#home-root').html(`
     <div class="container py-5">
+      <!-- Top row: Text and Image -->
       <div class="row align-items-center">
-        <div class="col-md-6 text-center mb-4 mb-md-0">
-          <img src="/static/media/homeipad.png" class="img-fluid rounded" alt="Home iPad">
+        <div class="col-md-4">
+          <h1 class="display-4 fw-bold">Your guide to using sketching brushes in <span class="text-info">Procreate.</span></h1>
+          <p class="lead mt-4 text-muted">Master the art of selecting the perfect brush for every creative project.</p>
         </div>
-        <div class="col-md-6">
-          <h1 class="display-4 fw-bold">Welcome to your guide for learning sketching brushes in <span class="text-info">Procreate.</span></h1>
-          <p class="lead mt-4">You’ll explore how to differentiate between brushes and when to use them.</p>
-          <a href="/quiz" class="btn btn-secondary btn-lg mt-4 px-4">GET STARTED&nbsp;&rarr;</a>
+
+        <div class="col-md-8 text-center mt-4 mt-md-0">
+          <img src="/static/media/homeipad.png" class="img-fluid hero-image" alt="Home iPad">
         </div>
       </div>
+
+      <!-- Button row: floated to match Procreate Interface nav item -->
+<div class="row mt-4">
+  <div class="col">
+    <div class="d-flex justify-content-end pe-4">
+      <a href="/quiz" class="btn btn-accent btn-lg px-5">GET STARTED&nbsp;&rarr;</a>
+    </div>
+  </div>
+</div>
+
+
     </div>`);
 }
+
+
+
+
+
 function bindHomeHandlers() {
   $('#home-root').on('click', '.btn-secondary', e=>{
     e.preventDefault(); window.location.href='/learn';

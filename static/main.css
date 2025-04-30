@@ -13,6 +13,8 @@
   }
 
   
+
+  
   .navbar {
     background-color: #f3efec;
     padding: 1rem 0;
@@ -45,4 +47,44 @@
   .navbar-nav .nav-link.active {
     color: #76d7db !important; /* turquoise for active link */
   }
+  
+  img.img-fluid.w-100 {
+    max-width: 250%;
+    height: auto;
+  }
+  .hero-image {
+    width: 120%;
+    max-width: none;
+    transform: scale(1.15);
+    margin-left: -5%;
+  }
+  .btn-accent {
+    background-color: #76e0df;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1.1rem 2.5rem;   /* makes it taller and wider */
+    font-size: 1.25rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn-accent:hover {
+    background-color: #5ccbc8;
+    transform: translateY(-2px);
+  }
+  
+  
+  .text-end.pe-4 {
+    padding-right: 3rem; /* Adjust as needed */
+  }
+  .ps-5 {
+    padding-left: 3rem; /* matches navbar's horizontal structure */
+  }
+  .d-flex.justify-content-end.pe-4 {
+    padding-right: 4rem; /* match with navbar padding if needed */
+  }
+
+      
   
