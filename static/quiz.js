@@ -206,7 +206,21 @@ function renderFillBlanks(q, $root) {
   const locked = window.userAnswers[q.id]?.locked;
   const currentAnswers = window.userAnswers[q.id] || {};
 
-  const $bank = $('<div class="draggable-container mb-3"></div>');
+  // Render sentences first
+  q.sentences.forEach(s => {
+    const prev = currentAnswers[s.drop_id] || '';
+    const dropHTML = `<div id="${s.drop_id}" class="drop-zone">${prev}</div>`;
+    $root.append(`<p>${s.text.replace(
+      `<div id='${s.drop_id}' class='drop-zone'></div>`, dropHTML
+    )}</p>`);
+  });
+
+  // Create the word bank container
+  const $bank = $('<div class="draggable-container" id="word-bank"></div>');
+
+  // 🔹 Add the "WORD BANK" header here
+  $bank.append(`<h5 class="word-bank-header text-center w-100 mb-3">WORD BANK</h5>`);
+
   const used = Object.values(currentAnswers);
 
   q.options.forEach(opt => {
@@ -217,16 +231,8 @@ function renderFillBlanks(q, $root) {
     }
   });
 
-  $root.append($bank);
-  $root.append('<br><br>');
-
-  q.sentences.forEach(s => {
-    const prev = currentAnswers[s.drop_id] || '';
-    const dropHTML = `<div id="${s.drop_id}" class="drop-zone p-2 border bg-light">${prev}</div>`;
-    $root.append(`<p>${s.text.replace(
-      `<div id='${s.drop_id}' class='drop-zone'></div>`, dropHTML
-    )}</p>`);
-  });
+  // Append the word bank to the bottom of the page
+  $('body').append($bank);
 
   bindFillEvents(q, $root);
 }

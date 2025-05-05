@@ -106,3 +106,44 @@ body {
     font-weight: 400;
     margin-bottom: 40px;
   }
+
+  /* quiz question styling */
+  .drop-zone {
+    display: inline-block;
+    min-height: 2rem;
+    border: 2px dashed #ccc;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background-color: #fafafa;
+    text-align: center;
+    width: 10%;
+  }
+  
+  .draggable-container {
+    min-height: 4rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .draggable {
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.1s;
+  }
+  
+  .draggable:active {
+    cursor: grabbing;
+    transform: scale(0.97);
+  }  
+
+  .word-bank-header {
+    font-size: 30px;
+    font-weight: bold;
+    color: #76e0df !important;
+  }
