@@ -12,7 +12,7 @@
 }
   
 body {
-    background-color: #f3efec; 
+    background-color: #f8f6f5; 
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -20,7 +20,7 @@ body {
 
 /* navbar styling */
   .navbar {
-    background-color: #f3efec;
+    background-color: #f3efec00;
     padding: 1rem 0;
   }
   
