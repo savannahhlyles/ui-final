@@ -11,24 +11,21 @@
     transition: opacity 0.3s ease-in-out;
 }
   
-
-  body {
-    background-color: #f3efec; /* light beige tone */
+body {
+    background-color: #f3efec; 
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-  }
+}
 
-  
-
-  
+/* navbar styling */
   .navbar {
     background-color: #f3efec;
     padding: 1rem 0;
   }
   
   .navbar .container {
-    background-color: #434343; /* dark gray pill background */
+    background-color: #434343;
     border-radius: 2rem;
     padding: 0.5rem 2rem;
   }
@@ -53,31 +50,24 @@
   }
   
   .navbar-nav .nav-link:hover {
-    color: #76d7db; /* turquoise on hover */
+    color: #76d7db; 
   }
   
   .navbar-nav .nav-link.active {
-    color: #76d7db !important; /* turquoise for active link */
+    color: #76d7db !important; 
   }
   
-  img.img-fluid.w-100 {
-    max-width: 250%;
-    height: auto;
-  }
-  .hero-image {
-    width: 150%;
-    height: auto;
-    margin: 0 auto;
-    display: block;
-  }
+
+
   .btn-accent {
     background-color: #76e0df;
     color: white;
     font-weight: bold;
     border: none;
     border-radius: 0.75rem;
-    padding: 1.1rem 2.5rem;   /* makes it taller and wider */
-    font-size: 1.25rem;
+    padding: 1.1rem 2.5rem; 
+    font-size: 1.5rem;
+    line-height: 1.1;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
@@ -86,28 +76,8 @@
     background-color: #76d7db;
     transform: translateY(-2px);
   }
-  
-  
-  .text-end.pe-4 {
-    padding-right: 3rem; /* Adjust as needed */
-  }
-  .ps-5 {
-    padding-left: 3rem; /* matches navbar's horizontal structure */
-  }
-  .d-flex.justify-content-end.pe-4 {
-    padding-right: 4rem; /* match with navbar padding if needed */
-  }
-
-
-  .btn-text-big {
-    font-size: 1.5rem;     /* just changes text size */
-    line-height: 1.1;        /* keeps height tight */
-    padding-top: 1rem;   /* optional: control top/bottom */
-    padding-bottom: 1rem;
-  }
 
   .highlight-word {
     color: #76d7db;  /* custom turquoise or any color */
     font-weight: 350;
   }
-  

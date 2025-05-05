@@ -1,14 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <!-- empty mount point -->
-  <div id="home-root"></div>
+<div id="home-root">
+  <div class="container py-5">
+    <!-- Top row: Text and Image -->
+    <div class="row align-items-center">
+      <div class="col-md-4">
+        <h1 class="display-4 fw-bold">
+          Your guide to using sketching brushes in <span class="highlight-word">Procreate.</span>
+        </h1>
+        <p class="lead mt-4 text-muted">
+          Master the art of selecting the perfect brush for every creative project.
+        </p>
+        <a href="/learn" class="btn btn-accent px-5 btn-text-big">GET STARTED</a>
+      </div>
 
-  <!-- jQuery (if not already loaded in layout.html) -->
-  <script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJ+YrfTKfHj+6DU6l7xbr7vz2D+6vAChs1iqY="
-    crossorigin="anonymous"></script>
-  <!-- your dynamic builder -->
-  <script src="{{ url_for('static', filename='functions.js') }}"></script>
+      <div class="col-md-8 text-center mt-4 mt-md-0">
+        <img src="/static/media/homeipad.png" class="img-fluid hero-image" alt="Home iPad">
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
