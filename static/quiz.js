@@ -209,10 +209,10 @@ function renderFillBlanks(q, $root) {
   // Render sentences first
   q.sentences.forEach(s => {
     const prev = currentAnswers[s.drop_id] || '';
-    const dropHTML = `<div id="${s.drop_id}" class="drop-zone">${prev}</div>`;
+    const dropHTML = `<span id="${s.drop_id}" class="drop-zone">${prev}</span>`;
     $root.append(`<p>${s.text.replace(
       `<div id='${s.drop_id}' class='drop-zone'></div>`, dropHTML
-    )}</p>`);
+    )}</p>`);    
   });
 
   // Create the word bank container
