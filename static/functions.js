@@ -1,29 +1,53 @@
-$(document).ready(function() {
-  // HOME or QUIZ start
-  if ($('#home-root').length) {
-    buildHomeUI(); bindHomeHandlers();
-  }
-  else if ($('#quiz-root').length) {
-    localStorage.removeItem('userAnswers');  // clear old state
-    buildQuizUI(); bindQuizHandlers();
+$(document).ready(function () {
+  if ($('#quiz-root').length) {
+    buildSideBySideCongratsPage();
   }
 });
 
-/* QUIZ START */
-function buildQuizUI() {
+function buildSideBySideCongratsPage() {
   $('#quiz-root').html(`
-    <div style="position:relative;display:inline-block">
-      <img src="/static/media/quizipad.png" width="800" alt="Quiz iPad">
-      <button id="start-quiz" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:1em 2em;font-size:1.5rem;cursor:pointer;">Start Quiz</button>
-    </div><br><br>
-    <button id="review" style="padding:.75em 1.5em;font-size:1.25rem;cursor:pointer;">Review</button>
+    <div style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-family: sans-serif;
+      box-sizing: border-box;
+    ">
+
+      <!-- LEFT: Text + Review Button -->
+      <div style="flex: 1 1 400px; max-width: 500px;">
+        <h1 style="font-size: 2.4rem; font-weight: bold; margin-bottom: 1rem;">
+          🎉 Congrats!
+        </h1>
+        <p style="font-size: 1.2rem; color: #444; margin-bottom: 2rem;">
+          You’ve finished the learning module. Ready to test your skills? Just click the iPad.
+        </p>
+        <a href="/learn" style="
+          background-color: #76e0df;
+          color: white;
+          padding: 0.75rem 1.5rem;
+          font-size: 1.1rem;
+          border-radius: 6px;
+          text-decoration: none;
+          transition: background-color 0.2s ease;
+        " onmouseover="this.style.backgroundColor='#000';"
+           onmouseout="this.style.backgroundColor= '#76e0df';">
+          Review
+        </a>
+      </div>
+
+      <!-- RIGHT: iPad image -->
+      <<a href="/questions/1" style="flex: 1 1 600px;">
+  <img src="/static/media/quizipad.png" alt="Start Quiz iPad" style="
+    width: 100%;
+    max-height: 100vh;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  " onmouseover="this.style.transform='scale(1.02)'"
+    onmouseout="this.style.transform='scale(1)'">
+</a>
+    </div>
   `);
-}
-function bindQuizHandlers() {
-  $('#start-quiz').on('click', e=>{
-    e.preventDefault(); localStorage.removeItem('userAnswers'); window.location.href='/questions/1';
-  });
-  $('#review').on('click', e=>{
-    e.preventDefault(); window.location.href='/learn';
-  });
 }

@@ -1,104 +1,34 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="py-4 bg-light" style="min-height:100vh;">
-  <div class="container">
-    <div class="row">
-      <!-- Left panel: brush info and navigation -->
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm">
-          <img
-            src="{{ url_for('static', filename='media/' + brush.img) }}"
-            class="card-img-top"
-            alt="{{ brush.name }}"
-          >
-          <div class="card-body">
-            <h2 class="card-title">{{ brush.name }}</h2>
-            <p class="card-text">{{ brush.description }}</p>
-          </div>
+<div class="container-fluid bg-light min-vh-100">
+  <div class="row">
+    <!-- LEFT COLUMN: Brush Info -->
+    <div class="col-md-4 d-flex align-items-center justify-content-center brush-info-col">
+      <div class="brush-info-box">
+        <!-- Icon + Name -->
+        <div class="d-flex align-items-center mb-3">
+          <img src="{{ url_for('static', filename='procreatelogo.png') }}" alt="Procreate Icon" class="brush-icon">
+          <h3 class="mb-0 brush-title">{{ brush.name }}</h3>
         </div>
 
-        <div class="d-flex flex-column mt-3">
-          <a href="{{ url_for('learn') }}"
-             class="btn btn-primary btn-block mb-2">
-            ← Back to Learn
-          </a>
-          <a href="{{ url_for('view_brush', brush_id=(brush.id % 6) + 1) }}"
-             class="btn btn-secondary btn-block">
-            Next Brush →
-          </a>
-          <a href="{{ url_for('quiz') }}"
-             class="btn btn-primary btn-block mb-2">
-            Skip to Quiz
-          </a>
+        <!-- Brush Image -->
+        <div class="mb-3">
+          <img src="{{ url_for('static', filename='media/' + brush.img) }}" alt="{{ brush.name }}" class="img-fluid rounded shadow-sm">
         </div>
+
+        <!-- Description -->
+        <p class="brush-description">{{ brush.description }}</p>
+
+        <!-- Button -->
+        <a href="{{ url_for('learn') }}" class="btn btn-info w-100 mt-3 return-btn">RETURN TO BRUSHES</a>
       </div>
+    </div>
 
-      <!-- Right panel: drag-and-drop demo + examples -->
-      <div class="col-md-8">
-        {% set slug = brush.name|lower|replace(' ', '_') %}
-
-        <!-- Demo mapping injected into the page -->
-        <script>
-          window.demoMap = {
-            {% set mapping = {
-              '6b_pencil': 'media/demos/6b_reveal.jpeg',
-              'hb_pencil': 'media/demos/hb_reveal.png',
-              'narinder_pencil': 'media/demos/Narinderpencil_reveal.png',
-              'oil_pastel': 'media/demos/OilPastel_Reveal .png',
-              'peppermint': 'media/demos/Peppermint_reveal.png',
-              'procreate_pencil': 'media/demos/procreatepencil_reveal.jpeg'
-            } %}
-            {% for key, path in mapping.items() %}
-              '{{ key }}': '{{ url_for("static", filename=path) }}'{{ "," if not loop.last }}
-            {% endfor %}
-          };
-        </script>
-
-        <!-- Drag & Drop Sketch Demo -->
-        <h3>Drag the Pencil to See a Sketch Demo</h3>
-        <div
-          id="sketch-area"
-          data-slug="{{ slug }}"
-          class="border bg-white position-relative mb-4"
-          style="height:300px;"
-        >
-          <div
-            id="placeholder"
-            class="position-absolute w-100 h-100 d-flex align-items-center justify-content-center text-muted"
-          >
-            Drop the pencil here
-          </div>
-        </div>
-        <img
-          id="drag-pencil"
-          src="{{ url_for('static', filename='media/pencil.jpeg') }}"
-          alt="Pencil"
-          draggable="true"
-          style="height:100px; cursor:grab; margin-bottom:30px;"
-        >
-
-        <!-- Examples Gallery -->
-        <h3>Examples of "{{ brush.name }}" in Action</h3>
-        <div class="row" id="examples-gallery">
-          {% for i in [1,2,3] %}
-            {% set example_path = 'media/examples/' ~ slug ~ '_example' ~ i ~ '.jpg' %}
-            <div class="col-sm-6 col-lg-4 mb-4">
-              <div class="card shadow-sm">
-                <img
-                  src="{{ url_for('static', filename=example_path) }}"
-                  class="card-img-top"
-                  alt="Example {{ i }} of {{ brush.name }}"
-                  onerror="this.onerror=null;this.src='https://m.media-amazon.com/images/I/81JGNp4qcdL.jpg';"
-                >
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
+    <!-- RIGHT COLUMN: Placeholder -->
+    <div class="col-md-8 d-flex align-items-center justify-content-center">
+      <p class="text-muted">Sketch area coming next...</p>
     </div>
   </div>
 </div>
-
-<script src="{{ url_for('static', filename='viewbrush.js') }}" defer></script>
 {% endblock %}
