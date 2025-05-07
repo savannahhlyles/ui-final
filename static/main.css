@@ -194,7 +194,6 @@ body {
 
 
   /* brush styling */
-
   .brush-info-col {
     background-color: #f8f6f5;
     padding-top: 2rem;   /* Reduce from default */
@@ -231,6 +230,23 @@ body {
     position: absolute;
     bottom: 120px;
     left: 30px;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    z-index: 5;
+    background-color: #76e0df;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .skip-quiz-btn-fixed {
+    position: absolute;
+    bottom: 120px;
+    right: 30px;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
     z-index: 5;
@@ -360,7 +376,7 @@ body {
   .ipad-container {
     width: 360px;
     height: 460px;
-    background-color: #fff;
+    background-color: #f8f6f5;
     border-radius: 30px;
     border: 4px solid #111;
     position: relative;
@@ -375,7 +391,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f9f9f9;
+    background-color: #f8f6f5;
   }
   
   .apple-pencil {
@@ -403,12 +419,12 @@ body {
     padding: 1rem;
   }
   .sketch-area-col {
-    background-color: transparent;
+    background-color: #f8f6f5;
   }
   .ipad-frame {
     width: 400px;
     height: 500px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     border-radius: 2rem;
     border: 15px solid black;
     position: relative;
@@ -418,13 +434,13 @@ body {
   
   /* White screen inside iPad */
   .ipad-screen-bg {
-    width: 100px;
-    height: 200px;
-    background-color: white;
+    width: 500px;
+    height: 800px;
+    margin-left: -10%;
+    background-color: rgb(255, 255, 255);
     border-radius: 2rem;
     position: relative;
     overflow: hidden;
-
   }
   
   /* Sketch image on top */
@@ -440,17 +456,19 @@ body {
   }
 
   .info-column {
+    color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-left: 2rem;
     margin-top: 2rem;
+    background-color: #f8f6f5 !important;
   }
   
   .progress-bar-container {
     width: 200px;
     height: 20px;
-    background: #eee;
+    background-color: #ffffff;
     border: 3px solid #333;
     border-radius: 10px;
     overflow: hidden;
@@ -466,7 +484,7 @@ body {
   
   .info-box {
     background: #333;
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 1rem;
     width: 240px;
     text-align: center;

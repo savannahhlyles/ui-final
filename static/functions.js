@@ -39,7 +39,7 @@ function buildSideBySideCongratsPage() {
           transition: background-color 0.2s ease;
         " onmouseover="this.style.backgroundColor='#000';"
            onmouseout="this.style.backgroundColor= '#76e0df';">
-          Review
+          REVIEW
         </a>
       </div>
 
