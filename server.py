@@ -40,7 +40,12 @@ brushes = [
         "name": "Procreate Pencil",
         "img": "procreate_pencil.png",
         "description": "Procreate Pencil delivers crisp, precise lines perfect for detailed work and fine shading.",
-        "slug": "procreatepencil_reveal.jpeg"
+        "slug": "procreatepencil_reveal.jpeg",
+        "messages": [
+            "Used to Color or Paint your Sketch",
+            "Change Opacity to Create Variety in the Precision of Lines",
+            "Universal Brush for All Sketches"
+        ]
     },
     {
         "id": 4,
@@ -59,7 +64,12 @@ brushes = [
         "name": "6B Pencil",
         "img": "6b.png",
         "description": "6B Pencil provides dark, expressive strokes with rich graphite texture for dramatic shading.",
-        "slug": "6b_reveal.jpeg"
+        "slug": "6b_reveal.jpeg",
+        "messages": [
+            "Create Loose Lines and Add Texture to Work",
+            "Adds a Hand-Drawn Feel to Work",
+            "Change Pressure Sensitivity for Small Details"
+        ]
     },
     {
         "id": 6,
