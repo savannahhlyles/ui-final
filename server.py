@@ -16,14 +16,24 @@ brushes = [
         "name": "HB Pencil",
         "img": "hb_pencil.png",
         "description": "The HB brush is ideal for sketching due to its natural, pressure-sensitive feel, like a traditional pencil.",
-        "slug": "hb_reveal.png"
+        "slug": "hb_reveal.png",
+        "messages": [
+            "Light Pressure for Construction Line",
+            "Hard Pressure for Definition and Proportion",
+            "Use with Low Opacity for Natural Feel"
+        ]
     },
     {
         "id": 2,
         "name": "Oil Pastel",
         "img": "oil.png",
         "description": "Oil Pastel offers smooth blending and vibrant color transitions, mimicking traditional pastel textures.",
-        "slug": "OilPastel_Reveal.png"
+        "slug": "OilPastel_Reveal.png",
+        "messages": [
+            "Use for Painterly Texture and Blending",
+            "Build Up Color in Layers",
+            "Try Smudging for a Blended Look"
+        ]
     },
     {
         "id": 3,
@@ -37,7 +47,12 @@ brushes = [
         "name": "Narinder Pencil",
         "img": "narinder.png",
         "description": "Narinder Pencil excels at light construction lines and initial form blocking.",
-        "slug": "Narinderpencil_reveal.png"
+        "slug": "Narinderpencil_reveal.png",
+        "messages": [
+            "Use for Final Sketch Pass or Line Refinement",
+            "Perfect for Confident, Single-Stroke Lines",
+            "Pair with a Light Sketch Underneath"
+        ]
     },
     {
         "id": 5,
@@ -51,7 +66,12 @@ brushes = [
         "name": "Peppermint",
         "img": "peppermint.png",
         "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes.",
-        "slug": "Peppermint_reveal.png"
+        "slug": "Peppermint_reveal.png",
+        "messages": [
+            "Use for Broad, Expressive Sketches",
+            "Adjust Brush Size Mid-Sketch",
+            "Play with Tilt for Shading"
+        ]
     }
 ]
 

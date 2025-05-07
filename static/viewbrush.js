@@ -36,11 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const infoBoxesContainer = document.getElementById('info-boxes');
 const progressBarFill = document.getElementById('progress-bar-fill');
 
-const messages = [
-  'Light Pressure for Construction Line',
-  'Hard Pressure for Definition and Proportion',
-  'Use with Low Opacity for Natural Feel'
-];
+const messages = window.brushMessages || [];
 
 let clickCount = 0;
 

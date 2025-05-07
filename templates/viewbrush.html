@@ -25,7 +25,6 @@
         <img id="sketch-image" src="" alt="Sketch Preview" class="sketch-inside">
       </div>
 
-
       <!-- Pencil -->
       <img
         id="drag-pencil"
@@ -45,14 +44,18 @@
     </div>
   </div>
 
-  <!-- RETURN BUTTON -->
+  <!-- RETURN BUTTONS -->
   <a href="{{ url_for('learn') }}" class="btn btn-info return-btn-fixed">RETURN TO BRUSHES</a>
-  <a href="{{ url_for('quiz') }}"    class="btn btn-info skip-quiz-btn-fixed">SKIP TO QUIZ</a>
+  <a href="{{ url_for('quiz') }}" class="btn btn-info skip-quiz-btn-fixed">SKIP TO QUIZ</a>
 
-  <!-- DEMO MAP -->
+  <!-- BRUSH MESSAGES & DEMO MAP -->
   <script>
+    // Expose brush-specific messages for JS use
+    window.brushMessages = {{ brush.messages | tojson | safe }};
+
+    // Map brush slugs to demo sketch URLs
     window.demoMap = {
-      'hb_pencil': '{{ url_for("static", filename="/Users/ceydatopcu/Desktop/ui-final/static/media/demos/hb_reveal.png") }}',
+      'hb_pencil': '{{ url_for("static", filename="media/demos/hb_reveal.png") }}',
       '6b_pencil': '{{ url_for("static", filename="media/demos/6b_reveal.jpeg") }}',
       'narinder_pencil': '{{ url_for("static", filename="media/demos/Narinderpencil_reveal.png") }}',
       'oil_pastel': '{{ url_for("static", filename="media/demos/OilPastel_Reveal.png") }}',
@@ -60,6 +63,8 @@
       'procreate_pencil': '{{ url_for("static", filename="media/demos/procreatepencil_reveal.jpeg") }}'
     };
   </script>
+
+  <!-- Main brush interaction script -->
   <script src="{{ url_for('static', filename='viewbrush.js') }}"></script>
 </div>
 {% endblock %}
