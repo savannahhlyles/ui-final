@@ -67,13 +67,19 @@ function checkAnswered(q, ans) {
     return !!ans.selected;
   }
 
-  if (q.type === 'matching' || q.type === 'fill_in_the_blanks') {
-    const expectedKeys = q.prompts?.map(p => p.drop_id) || q.sentences?.map(s => s.drop_id) || [];
+  if (q.type === 'matching') {
+    const expectedKeys = q.prompts?.map(p => p.drop_id) || [];
+    return expectedKeys.every(key => ans[key] && ans[key].trim() !== '');
+  }
+
+  if (q.type === 'fill_in_the_blanks') {
+    const expectedKeys = q.sentences?.map(s => s.drop_id) || [];
     return expectedKeys.every(key => ans[key] && ans[key].trim() !== '');
   }
 
   return false;
 }
+
 
 function renderMCQ(q, $root) {
   const $grp = $('<div class="list-group mb-3">');
@@ -206,23 +212,19 @@ function renderFillBlanks(q, $root) {
   const locked = window.userAnswers[q.id]?.locked;
   const currentAnswers = window.userAnswers[q.id] || {};
 
-  // Render sentences first
+  // Render sentences with placeholders like {{drop1}}
   q.sentences.forEach(s => {
     const prev = currentAnswers[s.drop_id] || '';
     const dropHTML = `<span id="${s.drop_id}" class="drop-zone">${prev}</span>`;
-    $root.append(`<p>${s.text.replace(
-      `<div id='${s.drop_id}' class='drop-zone'></div>`, dropHTML
-    )}</p>`);    
+    const safeText = s.text.replace(`{{${s.drop_id}}}`, dropHTML);
+    $root.append(`<p>${safeText}</p>`);
   });
 
   // Create the word bank container
   const $bank = $('<div class="draggable-container" id="word-bank"></div>');
-
-  // 🔹 Add the "WORD BANK" header here
   $bank.append(`<h5 class="word-bank-header text-center w-100 mb-3">WORD BANK</h5>`);
 
   const used = Object.values(currentAnswers);
-
   q.options.forEach(opt => {
     if (!used.includes(opt)) {
       const $opt = $(`<span class="draggable btn btn-outline-secondary me-1 mb-2" draggable="true">${opt}</span>`);
@@ -231,9 +233,7 @@ function renderFillBlanks(q, $root) {
     }
   });
 
-  // Append the word bank to the bottom of the page
-  $('body').append($bank);
-
+  $root.append($bank); // ⬅ Append to $root, not body
   bindFillEvents(q, $root);
 }
 
@@ -261,7 +261,9 @@ function bindFillEvents(q, $root) {
         $bank.append(`<span class="draggable btn btn-outline-secondary me-1 mb-2" draggable="true">${prev}</span>`);
       }
 
-      $(this).html(`<span class="draggable btn btn-outline-secondary me-1 mb-2" draggable="true" data-from-drop="${this.id}">${val}</span>`);
+      $(this).empty().append(
+        $(`<span class="draggable btn btn-outline-secondary me-1 mb-2" draggable="true" data-from-drop="${this.id}">${val}</span>`)
+      );
       $bank.find('.draggable').filter((_, el) => el.innerText === val).remove();
 
       if (fromDropId && fromDropId !== this.id) {
@@ -284,7 +286,6 @@ function bindFillEvents(q, $root) {
       }
     });
 
-  // 🆕 Allow dropping back into the word bank
   $bank.off('dragover drop')
     .on('dragover', e => { if (!locked) e.preventDefault(); })
     .on('drop', function (e) {
@@ -296,7 +297,6 @@ function bindFillEvents(q, $root) {
       if (!val || !fromDropId) return;
 
       $bank.append(`<span class="draggable btn btn-outline-secondary me-1 mb-2" draggable="true">${val}</span>`);
-
       $(`#${fromDropId}`).html('');
       delete window.userAnswers[q.id][fromDropId];
       persist();
