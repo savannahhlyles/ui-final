@@ -197,6 +197,8 @@ body {
 
   .brush-info-col {
     background-color: #f8f6f5;
+    padding-top: 2rem;   /* Reduce from default */
+    padding-bottom: 20rem;
   }
   
   .brush-info-box {
@@ -224,8 +226,160 @@ body {
     font-size: 1.1rem;
     color: #4d4d4d;
   }
-  
-  .return-btn {
+
+  .return-btn-fixed {
+    position: absolute;
+    bottom: 120px;
+    left: 30px;
     font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    z-index: 5;
+    background-color: #76e0df;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .sketch-area-col {
+    background-color: #d1d1d1;
+    padding-top: 3rem;
+  }
+  
+  .sketch-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+  
+  .ipad-container {
+    width: 360px;
+    height: 460px;
+    background-color: #fff;
+    border-radius: 30px;
+    border: 4px solid #111;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .sketch-placeholder {
+    width: 100%;
+    height: 100%;
+    color: #888;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f9f9;
+  }
+  
+  .apple-pencil {
+    height: 100px;
+    cursor: grab;
+    margin-top: 10px;
+  }
+  
+  .ipad-image {
+    width: 600px;        /* reduced from 400px */
+    height: auto;
+    display: block;
+    border-radius: 30px;
+  }
+  
+  .ipad-drop-target {
+    display: inline-block;
+    position: relative;
+  }
+  
+
+  
+  
+  .sketch-placeholder {
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 1rem;
+  }
+  .sketch-area-col {
+    background-color: transparent;
+  }
+  .ipad-frame {
+    width: 400px;
+    height: 500px;
+    background-color: black;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* White screen inside iPad */
+  .ipad-screen-bg {
+    width: 100px;
+    height: 200px;
+    background-color: black;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+
+  }
+  
+  /* Sketch image on top */
+  .sketch-inside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+  }
+  
+  
+  
+  .apple-pencil {
+    height: 100px;
+    cursor: grab;
+  }
+  
+
+  .info-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .progress-bar-container {
+    width: 200px;
+    height: 20px;
+    background: #eee;
+    border: 3px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #6fd4d8;
+    transition: width 0.3s ease;
+  }
+  
+  .info-box {
+    background: #333;
+    color: white;
+    padding: 1rem;
+    width: 240px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    margin-bottom: 10px;
   }
   

@@ -1,34 +1,63 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container-fluid bg-light min-vh-100">
+<div class="container-fluid bg-light min-vh-100 position-relative">
   <div class="row">
-    <!-- LEFT COLUMN: Brush Info -->
-    <div class="col-md-4 d-flex align-items-center justify-content-center brush-info-col">
+    <!-- LEFT COLUMN: Brush Info (col-md-3) -->
+    <div class="col-md-3 d-flex align-items-center brush-info-col">
       <div class="brush-info-box">
-        <!-- Icon + Name -->
         <div class="d-flex align-items-center mb-3">
           <img src="{{ url_for('static', filename='procreatelogo.png') }}" alt="Procreate Icon" class="brush-icon">
           <h3 class="mb-0 brush-title">{{ brush.name }}</h3>
         </div>
-
-        <!-- Brush Image -->
         <div class="mb-3">
           <img src="{{ url_for('static', filename='media/' + brush.img) }}" alt="{{ brush.name }}" class="img-fluid rounded shadow-sm">
         </div>
-
-        <!-- Description -->
         <p class="brush-description">{{ brush.description }}</p>
-
-        <!-- Button -->
-        <a href="{{ url_for('learn') }}" class="btn btn-info w-100 mt-3 return-btn">RETURN TO BRUSHES</a>
       </div>
     </div>
 
-    <!-- RIGHT COLUMN: Placeholder -->
-    <div class="col-md-8 d-flex align-items-center justify-content-center">
-      <p class="text-muted">Sketch area coming next...</p>
+    <!-- MIDDLE COLUMN: iPad (col-md-6) -->
+    <div class="col-md-6 text-center sketch-area-col">
+      <h3 class="sketch-title">Explore the Sketch ✏️</h3>
+      <div class="ipad-frame mx-auto" id="sketch-area" data-slug="{{ brush.slug }}">
+        <div class="ipad-screen-bg"></div>
+        <img id="sketch-image" src="" alt="Sketch Preview" class="sketch-inside">
+      </div>
+
+      <!-- Pencil -->
+      <img
+        id="drag-pencil"
+        src="{{ url_for('static', filename='media/pencil.jpeg') }}"
+        alt="Apple Pencil"
+        draggable="true"
+        class="apple-pencil mt-3"
+      >
+    </div>
+
+    <!-- RIGHT COLUMN: Progress + Info Boxes (col-md-3) -->
+    <div class="col-md-3 d-flex flex-column align-items-center mt-5" id="info-column">
+      <div class="progress-bar-container mb-4">
+        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+      </div>
+      <div id="info-boxes" class="w-100 d-flex flex-column gap-3"></div>
     </div>
   </div>
+
+  <!-- RETURN BUTTON -->
+  <a href="{{ url_for('learn') }}" class="btn btn-info return-btn-fixed">RETURN TO BRUSHES</a>
+
+  <!-- DEMO MAP -->
+  <script>
+    window.demoMap = {
+      'hb_pencil': '{{ url_for("static", filename="/Users/ceydatopcu/Desktop/ui-final/static/media/demos/hb_reveal.png") }}',
+      '6b_pencil': '{{ url_for("static", filename="media/demos/6b_reveal.jpeg") }}',
+      'narinder_pencil': '{{ url_for("static", filename="media/demos/Narinderpencil_reveal.png") }}',
+      'oil_pastel': '{{ url_for("static", filename="media/demos/OilPastel_Reveal.png") }}',
+      'peppermint': '{{ url_for("static", filename="media/demos/Peppermint_reveal.png") }}',
+      'procreate_pencil': '{{ url_for("static", filename="media/demos/procreatepencil_reveal.jpeg") }}'
+    };
+  </script>
+  <script src="{{ url_for('static', filename='viewbrush.js') }}"></script>
 </div>
 {% endblock %}

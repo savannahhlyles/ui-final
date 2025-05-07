@@ -11,12 +11,48 @@ def inject_title():
 
 # Brush definitions including description for view page
 brushes = [
-    {"id": 1, "name": "HB Pencil",           "img": "hb_pencil.png",      "description": "The HB brush is ideal for sketching due to its natural, pressure-sensitive feel, like a traditional pencil."},
-    {"id": 2, "name": "Oil Pastel",         "img": "oil.png",             "description": "Oil Pastel offers smooth blending and vibrant color transitions, mimicking traditional pastel textures."},
-    {"id": 3, "name": "Procreate Pencil",   "img": "procreate_pencil.png", "description": "Procreate Pencil delivers crisp, precise lines perfect for detailed work and fine shading."},
-    {"id": 4, "name": "Narinder Pencil",    "img": "narinder.png",        "description": "Narinder Pencil excels at light construction lines and initial form blocking."},
-    {"id": 5, "name": "6B Pencil",          "img": "6b.png",             "description": "6B Pencil provides dark, expressive strokes with rich graphite texture for dramatic shading."},
-    {"id": 6, "name": "Peppermint",         "img": "peppermint.png",     "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes."},
+    {
+        "id": 1,
+        "name": "HB Pencil",
+        "img": "hb_pencil.png",
+        "description": "The HB brush is ideal for sketching due to its natural, pressure-sensitive feel, like a traditional pencil.",
+        "slug": "hb_reveal.png"
+    },
+    {
+        "id": 2,
+        "name": "Oil Pastel",
+        "img": "oil.png",
+        "description": "Oil Pastel offers smooth blending and vibrant color transitions, mimicking traditional pastel textures.",
+        "slug": "OilPastel_Reveal.png"
+    },
+    {
+        "id": 3,
+        "name": "Procreate Pencil",
+        "img": "procreate_pencil.png",
+        "description": "Procreate Pencil delivers crisp, precise lines perfect for detailed work and fine shading.",
+        "slug": "procreatepencil_reveal.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "Narinder Pencil",
+        "img": "narinder.png",
+        "description": "Narinder Pencil excels at light construction lines and initial form blocking.",
+        "slug": "Narinderpencil_reveal.png"
+    },
+    {
+        "id": 5,
+        "name": "6B Pencil",
+        "img": "6b.png",
+        "description": "6B Pencil provides dark, expressive strokes with rich graphite texture for dramatic shading.",
+        "slug": "6b_reveal.jpeg"
+    },
+    {
+        "id": 6,
+        "name": "Peppermint",
+        "img": "peppermint.png",
+        "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes.",
+        "slug": "Peppermint_reveal.png"
+    }
 ]
 
 # Quiz questions
