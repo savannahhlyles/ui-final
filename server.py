@@ -149,7 +149,9 @@ questions = [
         "type": "multiple_choice",
         "text": "Identify the brush used for this sketch.",
         "options": ["HB Pencil", "Procreate Pencil", "Oil Pastel", "6B Pencil"],
-        "answer": "HB Pencil"
+        "answer": "HB Pencil",
+        "img": "/static/media/quizimage.png"  # make sure this file exists
+
     }
 ]
 
@@ -224,4 +226,4 @@ def procreate(slide_id = 1):
     return render_template('procreate.html', slide=slide)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5002)

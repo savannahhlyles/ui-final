@@ -13,6 +13,12 @@ function renderQuestion(q) {
   const $root = $('#question-root').empty();
   $root.append(`<h2>${q.id}. ${q.text}</h2><hr>`);
 
+  if (q.img) {
+    $root.append(`<div class="text-center mb-4">
+      <img src="${q.img}" alt="Question image" class="img-fluid rounded shadow">
+    </div>`);
+  }
+
   // Render question based on type
   if (q.type === 'multiple_choice') renderMCQ(q, $root);
   else if (q.type === 'matching') renderMatching(q, $root);
