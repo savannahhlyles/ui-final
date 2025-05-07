@@ -55,6 +55,16 @@ brushes = [
     }
 ]
 
+# Procreate Interface Structure
+
+procreate_slides = [
+        {"id": 1, "title": "Navigating the Procreate Interface","img": "/static/media/Procreate_interface/slide1.png","boxx": 66,"boxy": 30},
+        {"id": 2, "title": "Click on the Plus & Select a Canvas","img": "/static/media/Procreate_interface/slide2.png","boxx": 73,"boxy": 12},
+        {"id": 3, "title": "Explore Brushes & Click Sketching","img": "/static/media/Procreate_interface/slide3.png","boxx": 61,"boxy": 8},
+        {"id": 4, "title": "Change Size","img": "/static/media/Procreate_interface/slide4.png","boxx":23 ,"boxy": 42},
+        {"id": 5, "title": "Change Opacity","img": "/static/media/Procreate_interface/slide5.png","boxx":23 ,"boxy": 65},
+]
+
 # Quiz questions
 questions = [
     {
@@ -177,8 +187,11 @@ def submit_quiz():
     return render_template('quizresults.html', score=score, total=total, summary=summary)
 
 @app.route('/procreate')
-def procreate():
-    return render_template('procreate.html')
+@app.route('/procreate/<int:slide_id>')
+def procreate(slide_id = 1):
+    slide = procreate_slides[slide_id-1]
+    print(slide)
+    return render_template('procreate.html', slide=slide)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

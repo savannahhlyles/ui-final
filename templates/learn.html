@@ -1,32 +1,30 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="py-4" style="background-color:#f6f2ec;">
+<div class="py-4">
 
   <!-- Page Header -->
   <div class="text-center mb-4">
     <h1 class="font-weight-bold">CHOOSE A BRUSH</h1>
-    <img src="{{ url_for('static', filename='media/pencil.jpeg') }}"
+    <img src="{{ url_for('static', filename='media/pencil.png') }}"
          alt="Apple Pencil"
          class="my-3"
-         style="max-width:200px;">
+         style="max-width:500px;">
   </div>
 
   <!-- Brush Grid: 3-per-row on md+, 2-per on sm, 1-per on xs -->
   <div class="row">
     {% for b in brushes %}
-      <div class="col-12 col-sm-6 col-md-4 mb-4">
+      <div class="col-12 col-sm-6 col-md-6 mb-4">
         <a href="{{ url_for('view_brush', brush_id=b.id) }}"
            class="d-block text-decoration-none">
-          <div class="card bg-dark text-light rounded-lg shadow-sm border-0">
             <div class="card-body p-3 text-center">
-              <h5 class="card-title">{{ b.name }}</h5>
-              <img src="{{ url_for('static', filename='media/' ~ b.img) }}"
-                   alt="{{ b.name }}"
-                   class="img-fluid mt-2"
-                   style="max-height:100px; object-fit:contain;">
+                <div class="image-wrapper">
+                    <img src="{{ url_for('static', filename='media/' ~ b.img) }}"
+                       alt="{{ b.name }}"
+                 class="img-fluid">
+               </div>
             </div>
-          </div>
         </a>
       </div>
     {% endfor %}
@@ -34,8 +32,8 @@
 
   <!-- Navigation Buttons -->
   <div class="d-flex justify-content-between mt-4">
-    <a href="{{ url_for('default') }}" class="btn btn-light btn-lg shadow">← Home</a>
-    <a href="{{ url_for('quiz') }}"    class="btn btn-light btn-lg shadow">Quiz Yourself</a>
+    <a href="{{ url_for('default') }}" class="btn btn-accent btn-lg shadow">← Home</a>
+    <a href="{{ url_for('quiz') }}"    class="btn btn-accent btn-lg shadow">Quiz Yourself</a>
   </div>
 </div>
 {% endblock %}

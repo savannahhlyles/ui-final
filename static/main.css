@@ -243,6 +243,107 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, transform 0.2s ease;
   }
+
+  .big-bold{
+    font-weight: bold;
+    color: #000000;
+    font-size: 2.5rem;
+}
+
+.bordered{
+    background: #cacaca;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    margin-top:50px;
+}
+
+.slide{
+    margin-top: 50px;
+    width: 200px;
+    position: relative;
+}
+
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.cyan-box {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 5px solid #76e0df;
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 2;
+
+    animation: pulsate 1.5s ease-in-out infinite;
+}
+
+.btn-link {
+    display: inline-block;
+    background-color: grey;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+.btn-link:hover {
+    background-color: #5a5a5a;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-body img {
+    max-height: 100px;
+    object-fit: contain;
+    border: 5px solid #373737;
+    border-radius: 35px;
+    display: inline-block;
+}
+
+.image-wrapper {
+    position: relative;
+    border-radius: 40px;
+    padding: 5px;
+    display: inline-block;
+    transition: border-color 0.3s ease;
+}
+
+.image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 8px solid #76e0df;
+    border-radius: 40px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    box-sizing: border-box;
+}
+
+.image-wrapper:hover::after {
+    opacity: 1;
+}
   
   .sketch-area-col {
     background-color: #d1d1d1;
@@ -278,10 +379,11 @@ body {
   }
   
   .apple-pencil {
-    height: 100px;
+    height: 20px;
     cursor: grab;
-    margin-top: 10px;
+    animation: pulsate 1.5s ease-in-out infinite;
   }
+
   
   .ipad-image {
     width: 600px;        /* reduced from 400px */
@@ -294,10 +396,7 @@ body {
     display: inline-block;
     position: relative;
   }
-  
 
-  
-  
   .sketch-placeholder {
     font-size: 1.1rem;
     text-align: center;
@@ -309,17 +408,19 @@ body {
   .ipad-frame {
     width: 400px;
     height: 500px;
-    background-color: black;
+    background-color: white;
     border-radius: 2rem;
+    border: 15px solid black;
     position: relative;
     overflow: hidden;
+    margin-bottom: 20px;
   }
   
   /* White screen inside iPad */
   .ipad-screen-bg {
     width: 100px;
     height: 200px;
-    background-color: black;
+    background-color: white;
     border-radius: 2rem;
     position: relative;
     overflow: hidden;
@@ -337,14 +438,6 @@ body {
     object-fit: contain;
     display: none;
   }
-  
-  
-  
-  .apple-pencil {
-    height: 100px;
-    cursor: grab;
-  }
-  
 
   .info-column {
     display: flex;
