@@ -110,14 +110,15 @@ body {
   /* quiz question styling */
   .drop-zone {
     display: inline-block;
-    padding: 1.2rem;
-    width: 12.5%;
-    border: 2px solid #cccccc50;
-    margin-bottom: 1rem;
-    border-radius: 2rem;
-    background-color: #fafafa;
-    text-align: center;    
-  }
+    min-width: 5ch; /* or adjust to your liking */
+    min-height: 1.5em; 
+    border-bottom: 1px dashed #aaa;
+    padding: 0 0.25em;
+    margin: 0 0.2em;
+    vertical-align: baseline;
+    font: inherit;
+    color: inherit;
+  }  
   
   .draggable-container {
     min-height: 4rem;
