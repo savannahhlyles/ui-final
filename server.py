@@ -169,7 +169,7 @@ def submit_quiz():
         qid = str(q['id'])
         ua = user_answers.get(qid)
         if q['type'] == 'multiple_choice':
-            correct = (ua == q['answer'])
+            correct = (ua.get("selected") == q['answer']) if isinstance(ua, dict) else False
         else:
             correct = isinstance(ua, dict) and all(
                 ua.get(k) == v for k, v in q['answer'].items()
@@ -179,7 +179,7 @@ def submit_quiz():
         summary.append({
             'id': q['id'],
             'text': q['text'],
-            'your_answer': ua,
+            'your_answer': ua.get("selected") if isinstance(ua, dict) else ua,
             'correct_answer': q['answer'],
             'correct': correct
         })
