@@ -158,7 +158,41 @@ body {
     color: #333;
     font-weight: 400;
   }
-  
+
+  .list-group-item.active {
+    background-color: #76e0df !important;
+    border-color: #76e0df !important;
+    color: white !important;
+  }
+
+  /* Light gray BACK button */
+#question-root .btn-secondary {
+  background-color: #d3d3d3;
+  border-color: #d3d3d3;
+  color: #000;
+  border-radius: 20px;
+}
+
+#question-root .btn-secondary:hover {
+  background-color: #c0c0c0;
+  border-color: #c0c0c0;
+}
+
+/* Dark gray NEXT button */
+#question-root .btn-primary {
+  background-color: #555;
+  border-color: #555;
+  color: white;
+  border-radius: 20px;
+}
+
+#question-root .btn-primary:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+
+  /* brush styling */
 
   .brush-info-col {
     background-color: #f8f6f5;
