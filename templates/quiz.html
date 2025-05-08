@@ -1,9 +1,35 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div id="quiz-root"></div>
+<div id="quiz-root">
+  <div class="quiz-start-container">
+    <div class="quiz-start-text">
+      <h1 class="quiz-start-heading">🎉 Well done!</h1>
+      <p class="quiz-start-subtext">
+        You’ve successfully completed the learning module and explored the essential tools and techniques.
+      </p>
+      <p class="quiz-start-subtext">
+        Now it’s time to put your skills to the test — no pressure, just a chance to show what you know.
+      </p>
+      <p class="quiz-start-subtext cta">
+        Tap the iPad to begin.
+      </p>
+      <p class="quiz-start-subtext">
+        Need a quick refresh?
+      </p>
+      <a href="/learn" id="review-button" class="btn btn-accent btn-lg shadow">REVIEW</a>
+    </div>
 
-<!-- jQuery -->
+    <!-- RIGHT: iPad image -->
+    <a href="/questions/1" id="start-quiz" class="quiz-start-image-link">
+      <img src="/static/media/quizipad.png" alt="Start Quiz iPad" class="quiz-start-image">
+    </a>
+  </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-<script src="{{ url_for('static', filename='functions.js') }}"></script>
+
+<script>
+  localStorage.removeItem('userAnswers');
+</script>
 {% endblock %}
