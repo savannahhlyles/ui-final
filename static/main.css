@@ -626,24 +626,3 @@ body {
   cursor: pointer;  
   transition: transform 0.2s ease;
 }
-
-
-
-
-
-
-
-/* TO DO */
-/* Reduce spacing between brush cards */
-.learn-page .row > div {
-  margin-bottom: -20px;
-}
-
-/* Optional: tighten image size/padding if needed */
-.learn-page img.img-fluid {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  margin-bottom: -10px;
-}
