@@ -9,6 +9,8 @@
     display: block !important;
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
+    border-radius: 2rem;
+    margin-left: 12%;
 }
   
 body {
