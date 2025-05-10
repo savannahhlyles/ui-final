@@ -35,53 +35,56 @@ function renderQuestion(q) {
   else if (q.type === 'matching') renderMatching(q, $root);
   else if (q.type === 'fill_in_the_blanks') renderFillBlanks(q, $root);
 
-  // Navigation
   const backId = q.id > 1 ? q.id - 1 : null;
-  const nextId = q.id < totalQuestions ? q.id + 1 : null;
+const nextId = q.id < totalQuestions ? q.id + 1 : null;
 
-  const $navWrapper = $(`
-    <div class="mt-5 d-flex justify-content-between">
-      <div class="left-nav"></div>
-      <div class="right-nav"></div>
-    </div>
-  `);
+const $navWrapper = $(`
+  <div class="mt-5 d-flex justify-content-between">
+    <div class="left-nav"></div>
+    <div class="right-nav"></div>
+  </div>
+`);
 
-  const backLink = backId ? `/questions/${backId}` : '/quiz';
-  $navWrapper.find('.left-nav').append(
-    `<a href="${backLink}" class="btn btn-secondary">Back</a>`
-  );
+const backLink = backId ? `/questions/${backId}` : '/quiz';
+$navWrapper.find('.left-nav').append(
+  `<a href="${backLink}" class="btn btn-secondary">Back</a>`
+);
 
-  if (nextId) {
-    const $nextBtn = $('<button class="btn btn-primary">Next</button>');
-    $nextBtn.on('click', function () {
-      const ans = window.userAnswers[q.id];
-      const isAnswered = checkAnswered(q, ans);
-      if (!isAnswered) {
-        showPopupMessage("Please answer the question before continuing.", false);
-        return;
-      }
-      window.userAnswers[q.id].locked = true;
-      persist();
-      window.location.href = `/questions/${nextId}`;
-    });
-    $navWrapper.find('.right-nav').append($nextBtn);
-  } else {
-    const $submitBtn = $('<button id="submit-quiz" class="btn btn-success">Submit</button>');
-    $submitBtn.on('click', function () {
-      const ans = window.userAnswers[q.id];
-      const isAnswered = checkAnswered(q, ans);
-      if (!isAnswered) {
-        showPopupMessage("Please answer the question before submitting.", false);
-        return;
-      }
-      window.userAnswers[q.id].locked = true;
-      persist();
-      submitQuiz();
-    });
-    $navWrapper.find('.right-nav').append($submitBtn);
-  }
+const answer = window.userAnswers[q.id] || {};
+const selected = answer.selected;
+const submitted = answer.submitted;
 
-  $root.append($navWrapper);
+// Always show "Submit Answer" until submitted
+if (!submitted) {
+  const $submitAnswerBtn = $('<button class="btn btn-primary">Submit Answer</button>');
+  $submitAnswerBtn.on('click', function () {
+    if (!selected) {
+      showPopupMessage("Please select an answer before submitting.", false);
+      return;
+    }
+    const isCorrect = selected === q.answer;
+    window.userAnswers[q.id].locked = true;
+    window.userAnswers[q.id].submitted = true;
+    persist();
+    showPopupMessage(isCorrect ? "Correct!" : "Incorrect", isCorrect);
+    renderQuestion(q); // Re-render to show Next/Submit Quiz
+  });
+  $navWrapper.find('.right-nav').append($submitAnswerBtn);
+} else if (nextId) {
+  const $nextBtn = $('<button class="btn btn-primary">Next</button>');
+  $nextBtn.on('click', function () {
+    window.location.href = `/questions/${nextId}`;
+  });
+  $navWrapper.find('.right-nav').append($nextBtn);
+} else {
+  const $submitQuizBtn = $('<button id="submit-quiz" class="btn btn-success">Submit Quiz</button>');
+  $submitQuizBtn.on('click', function () {
+    submitQuiz();
+  });
+  $navWrapper.find('.right-nav').append($submitQuizBtn);
+}
+
+$root.append($navWrapper);
 }
 
 function checkAnswered(q, ans) {
@@ -104,29 +107,31 @@ function checkAnswered(q, ans) {
   return false;
 }
 
-
 function renderMCQ(q, $root) {
   const $grp = $('<div class="list-group mb-3">');
-  const locked = window.userAnswers[q.id]?.locked;
+  const answer = window.userAnswers[q.id] || {};
+  const locked = answer.locked;
+
+  // Render options
   q.options.forEach(opt => {
     const $it = $(`<button class="list-group-item list-group-item-action">${opt}</button>`);
-    if (window.userAnswers[q.id]?.selected === opt) $it.addClass('active');
+    if (answer.selected === opt) $it.addClass('active');
     if (locked) $it.attr('disabled', true);
-    $it.on('click', function() {
+    $it.on('click', function () {
       if (locked) return;
       $it.siblings().removeClass('active');
       $it.addClass('active');
       window.userAnswers[q.id] = {
         selected: opt,
-        locked: false
+        locked: false,
+        submitted: false
       };
       persist();
-
-      const isCorrect = opt === q.answer;
-      showPopupMessage(isCorrect ? "Correct!" : "Incorrect", isCorrect);
+      renderQuestion(q); // Re-render to show submit button in nav
     });
     $grp.append($it);
   });
+
   $root.append($grp);
 }
 
