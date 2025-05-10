@@ -19,6 +19,18 @@ function renderQuestion(q) {
     </div>`);
   }
 
+  if (q.id === 1) {
+    const $videoContainer = $(`
+      <div class="text-center mb-4">
+        <video autoplay muted loop playsinline style="width: 500px;" class="rounded shadow">
+          <source src="/static/media/BrushDemo.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    `);
+    $root.append($videoContainer);
+  }
+
   // Render question based on type
   if (q.type === 'multiple_choice') renderMCQ(q, $root);
   else if (q.type === 'matching') renderMatching(q, $root);
