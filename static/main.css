@@ -628,3 +628,34 @@ body {
   cursor: pointer;  
   transition: transform 0.2s ease;
 }
+
+#brush-key-panel {
+  position: fixed;
+  top: 30%;
+  left: -150px;
+  width: 150px;
+  z-index: 1000;
+  transition: left 0.3s ease;
+}
+
+#brush-key-panel:hover {
+  left: 0;
+}
+
+#brush-key-tab {
+  position: absolute;
+  right: -44px;
+  top: 33%;
+  background-color: #76e0df;
+  color: #363636;
+  padding: 8px 10px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  border-radius: 0px 4px 4px 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#brush-key-content {
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}

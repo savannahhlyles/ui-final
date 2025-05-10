@@ -8,10 +8,20 @@ $(function(){
 function persist() {
   localStorage.setItem('userAnswers', JSON.stringify(window.userAnswers));
 }
+
 function renderQuestion(q) {
   const $root = $('#question-root').empty();
   $root.append(`<h2>${q.id}. ${q.text}</h2><hr>`);
 
+  $('body').append(`
+    <div id="brush-key-panel">
+      <div id="brush-key-tab">Brush Key</div>
+      <div id="brush-key-content">
+        <img src="/static/media/brushkey.png" alt="Brush Key" class="img-fluid">
+      </div>
+    </div>
+  `);
+  
   if (q.img) {
     $root.append(`<div class="text-center mb-4">
       <img src="${q.img}" alt="Question image" class="img-fluid rounded shadow">
@@ -30,61 +40,92 @@ function renderQuestion(q) {
     $root.append($videoContainer);
   }
 
-  // Render question based on type
+  // Render question content
   if (q.type === 'multiple_choice') renderMCQ(q, $root);
   else if (q.type === 'matching') renderMatching(q, $root);
   else if (q.type === 'fill_in_the_blanks') renderFillBlanks(q, $root);
 
+  // Navigation
   const backId = q.id > 1 ? q.id - 1 : null;
-const nextId = q.id < totalQuestions ? q.id + 1 : null;
+  const nextId = q.id < totalQuestions ? q.id + 1 : null;
+  const backLink = backId ? `/questions/${backId}` : '/quiz';
 
-const $navWrapper = $(`
-  <div class="mt-5 d-flex justify-content-between">
-    <div class="left-nav"></div>
-    <div class="right-nav"></div>
-  </div>
-`);
+  const $navWrapper = $(`
+    <div class="mt-5 d-flex justify-content-between">
+      <div class="left-nav"></div>
+      <div class="right-nav"></div>
+    </div>
+  `);
 
-const backLink = backId ? `/questions/${backId}` : '/quiz';
-$navWrapper.find('.left-nav').append(
-  `<a href="${backLink}" class="btn btn-secondary">Back</a>`
-);
+  $navWrapper.find('.left-nav').append(
+    `<a href="${backLink}" class="btn btn-secondary">Back</a>`
+  );
 
-const answer = window.userAnswers[q.id] || {};
-const selected = answer.selected;
-const submitted = answer.submitted;
+  const answer = window.userAnswers[q.id] || {};
+  const selected = answer.selected;
+  const submitted = answer.submitted;
+  const locked = answer.locked;
 
-// Always show "Submit Answer" until submitted
-if (!submitted) {
-  const $submitAnswerBtn = $('<button class="btn btn-primary">Submit Answer</button>');
-  $submitAnswerBtn.on('click', function () {
-    if (!selected) {
-      showPopupMessage("Please select an answer before submitting.", false);
-      return;
-    }
-    const isCorrect = selected === q.answer;
-    window.userAnswers[q.id].locked = true;
-    window.userAnswers[q.id].submitted = true;
-    persist();
-    showPopupMessage(isCorrect ? "Correct!" : "Incorrect", isCorrect);
-    renderQuestion(q); // Re-render to show Next/Submit Quiz
-  });
-  $navWrapper.find('.right-nav').append($submitAnswerBtn);
-} else if (nextId) {
-  const $nextBtn = $('<button class="btn btn-primary">Next</button>');
-  $nextBtn.on('click', function () {
-    window.location.href = `/questions/${nextId}`;
-  });
-  $navWrapper.find('.right-nav').append($nextBtn);
-} else {
-  const $submitQuizBtn = $('<button id="submit-quiz" class="btn btn-success">Submit Quiz</button>');
-  $submitQuizBtn.on('click', function () {
-    submitQuiz();
-  });
-  $navWrapper.find('.right-nav').append($submitQuizBtn);
-}
+  // Show "Submit Answer" if not submitted
+  if (!submitted) {
+    const $submitBtn = $('<button class="btn btn-primary">Submit Answer</button>');
+    $submitBtn.on('click', function () {
+      // Handle each type
+      const ans = window.userAnswers[q.id];
+      let isCorrect = false;
+      let allFilled = false;
 
-$root.append($navWrapper);
+      if (q.type === 'multiple_choice') {
+        if (!ans || !ans.selected) {
+          showPopupMessage("Please select an answer before submitting.", false);
+          return;
+        }
+        isCorrect = ans.selected === q.answer;
+        allFilled = true;
+
+      } else if (q.type === 'fill_in_the_blanks') {
+        const expectedKeys = q.sentences?.map(s => s.drop_id) || [];
+        allFilled = expectedKeys.every(key => ans?.[key] && ans[key].trim() !== '');
+        if (!allFilled) {
+          showPopupMessage("Please fill in all blanks before submitting.", false);
+          return;
+        }
+        isCorrect = expectedKeys.every(key => ans[key] === q.answer[key]);
+
+      } else if (q.type === 'matching') {
+        const expectedKeys = q.prompts?.map(p => p.drop_id) || [];
+        allFilled = expectedKeys.every(key => ans?.[key] && ans[key].trim() !== '');
+        if (!allFilled) {
+          showPopupMessage("Please complete all matches before submitting.", false);
+          return;
+        }
+        isCorrect = expectedKeys.every(key => ans[key] === q.answer[key]);
+      }
+
+      // Lock and mark as submitted
+      window.userAnswers[q.id].locked = true;
+      window.userAnswers[q.id].submitted = true;
+      persist();
+
+      showPopupMessage(isCorrect ? "Correct!" : "Incorrect", isCorrect);
+      renderQuestion(q); // re-render to show Next/Submit
+    });
+    $navWrapper.find('.right-nav').append($submitBtn);
+  } else if (nextId) {
+    const $nextBtn = $('<button class="btn btn-primary">Next</button>');
+    $nextBtn.on('click', function () {
+      window.location.href = `/questions/${nextId}`;
+    });
+    $navWrapper.find('.right-nav').append($nextBtn);
+  } else {
+    const $submitQuizBtn = $('<button class="btn btn-success">Submit Quiz</button>');
+    $submitQuizBtn.on('click', function () {
+      submitQuiz();
+    });
+    $navWrapper.find('.right-nav').append($submitQuizBtn);
+  }
+
+  $root.append($navWrapper);
 }
 
 function checkAnswered(q, ans) {
@@ -134,7 +175,6 @@ function renderMCQ(q, $root) {
 
   $root.append($grp);
 }
-
 function renderMatching(q, $root) {
   const $row = $('<div class="row">'),
         $l = $('<div class="col-md-6">'),
@@ -143,20 +183,33 @@ function renderMatching(q, $root) {
   const locked = window.userAnswers[q.id]?.locked;
   const currentAnswers = window.userAnswers[q.id] || {};
 
-  // Drop zones (left)
+  // Drop zones (left side)
   q.prompts.forEach(p => {
-    const prev = currentAnswers[p.drop_id] || '';
-    $l.append(`<div class="mb-3">
-                <strong>${p.text}</strong>
-                <div id="${p.drop_id}" class="drop-zone p-2 border bg-light" style="min-height:2rem;">${prev}</div>
-              </div>`);
+    const val = currentAnswers[p.drop_id] || '';
+    const $zone = $(`
+      <div class="mb-3">
+        <strong>${p.text}</strong>
+        <div id="${p.drop_id}" class="drop-zone bg-light border rounded p-2 mt-2"
+             style="min-height: 2.2rem; min-width: 100px; display: inline-block; vertical-align: middle;">
+        </div>
+      </div>
+    `);
+
+    // Add dropped item back into zone
+    if (val) {
+      const $draggable = $(`<span class="draggable btn btn-outline-dark me-1 mb-1" draggable="true">${val}</span>`);
+      if (locked) $draggable.attr('draggable', false).addClass('disabled');
+      $zone.find('.drop-zone').append($draggable);
+    }
+
+    $l.append($zone);
   });
 
-  // Option bank (right)
+  // Option bank (right side)
   const used = Object.values(currentAnswers);
   q.options.forEach(opt => {
     if (!used.includes(opt)) {
-      const $opt = $(`<div class="draggable btn btn-outline-dark mb-2" draggable="true">${opt}</div>`);
+      const $opt = $(`<span class="draggable btn btn-outline-dark me-2 mb-2 d-inline-block" draggable="true">${opt}</span>`);
       if (locked) $opt.attr('draggable', false).addClass('disabled');
       $r.append($opt);
     }
@@ -204,14 +257,6 @@ function bindMatchingEvents(q, $root) {
       persist();
 
       bindMatchingEvents(q, $root);
-
-      const ans = window.userAnswers[q.id];
-      const expected = q.answer;
-      const allFilled = Object.keys(expected).every(key => ans[key]);
-      if (allFilled) {
-        const isCorrect = Object.keys(expected).every(key => ans[key] === expected[key]);
-        showPopupMessage(isCorrect ? "Correct!" : "Incorrect", isCorrect);
-      }
     });
 
   // 🆕 Allow dropping back into the bank
@@ -305,14 +350,6 @@ function bindFillEvents(q, $root) {
       persist();
 
       bindFillEvents(q, $root);
-
-      const ans = window.userAnswers[q.id];
-      const expected = q.answer;
-      const allFilled = Object.keys(expected).every(key => ans[key]);
-      if (allFilled) {
-        const isCorrect = Object.keys(expected).every(key => ans[key] === expected[key]);
-        showPopupMessage(isCorrect ? "Correct!" : "Incorrect", isCorrect);
-      }
     });
 
   $bank.off('dragover drop')
