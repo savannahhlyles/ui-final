@@ -246,7 +246,7 @@ function renderFillBlanks(q, $root) {
     const prev = currentAnswers[s.drop_id] || '';
     const dropHTML = `<span id="${s.drop_id}" class="drop-zone">${prev}</span>`;
     const safeText = s.text.replace(`{{${s.drop_id}}}`, dropHTML);
-    $root.append(`<p>${safeText}</p>`);
+    $root.append(`<id="question-root" p>${safeText}</p>`);
   });
 
   // Create the word bank container
