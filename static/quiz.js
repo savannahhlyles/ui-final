@@ -8,7 +8,6 @@ $(function(){
 function persist() {
   localStorage.setItem('userAnswers', JSON.stringify(window.userAnswers));
 }
-
 function renderQuestion(q) {
   const $root = $('#question-root').empty();
   $root.append(`<h2>${q.id}. ${q.text}</h2><hr>`);
@@ -39,11 +38,18 @@ function renderQuestion(q) {
   // Navigation
   const backId = q.id > 1 ? q.id - 1 : null;
   const nextId = q.id < totalQuestions ? q.id + 1 : null;
-  const $nav = $('<div class="mt-4">');
 
-  if (backId) {
-    $nav.append(`<a href="/questions/${backId}" class="btn btn-secondary me-2">Back</a>`);
-  }
+  const $navWrapper = $(`
+    <div class="mt-5 d-flex justify-content-between">
+      <div class="left-nav"></div>
+      <div class="right-nav"></div>
+    </div>
+  `);
+
+  const backLink = backId ? `/questions/${backId}` : '/quiz';
+  $navWrapper.find('.left-nav').append(
+    `<a href="${backLink}" class="btn btn-secondary">Back</a>`
+  );
 
   if (nextId) {
     const $nextBtn = $('<button class="btn btn-primary">Next</button>');
@@ -58,7 +64,7 @@ function renderQuestion(q) {
       persist();
       window.location.href = `/questions/${nextId}`;
     });
-    $nav.append($nextBtn);
+    $navWrapper.find('.right-nav').append($nextBtn);
   } else {
     const $submitBtn = $('<button id="submit-quiz" class="btn btn-success">Submit</button>');
     $submitBtn.on('click', function () {
@@ -72,10 +78,10 @@ function renderQuestion(q) {
       persist();
       submitQuiz();
     });
-    $nav.append($submitBtn);
+    $navWrapper.find('.right-nav').append($submitBtn);
   }
 
-  $root.append($nav);
+  $root.append($navWrapper);
 }
 
 function checkAnswered(q, ans) {
