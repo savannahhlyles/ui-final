@@ -1,22 +1,54 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="container py-5">
-    <h1>Your Score: {{ score }}/{{ total }}</h1>
-    <hr>
-    <h3>Quiz Summary</h3>
-    <ul class="list-group mb-4">
-      {% for q in summary %}
-        <li class="list-group-item {% if q.correct %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
-          <strong>{{ q.id }}. {{ q.text }}</strong><br>
-          <em>Your answer:</em> {{ q.your_answer }}<br>
-          <em>Correct answer:</em> {{ q.correct_answer }}
-        </li>
-      {% endfor %}
-    </ul>
-    <div class="d-flex gap-3">
-      <a href="{{ url_for('quiz') }}" class="btn btn-primary">Retake Quiz</a>
-      <a href="{{ url_for('learn') }}" class="btn btn-secondary">Review Brushes</a>
-      <a href="{{ url_for('procreate') }}" class="btn btn-info">Explore Procreate</a>
-    </div>
+<div class="container py-5">
+  <h1>Your Score: {{ score }}/{{ total }}</h1>
+  <hr>
+  <h3>Quiz Summary</h3>
+  <ul class="list-group mb-4">
+    {% for q in summary %}
+      <li class="list-group-item d-flex flex-column {% if q.correct %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
+        <div class="d-flex justify-content-between align-items-start">
+          <strong>{{ q.id }}. {{ q.text }}</strong>
+          <span class="fs-4">
+            {% if q.correct %}
+              ✅
+            {% else %}
+              ❌
+            {% endif %}
+          </span>
+        </div>
+
+        <div class="mt-2">
+          <em>Your answer:</em><br>
+          {% if q.your_answer is mapping %}
+            <ul class="mb-2">
+              {% for key, value in q.your_answer.items() %}
+                <li>{{ key }}: {{ value }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{{ q.your_answer }}</p>
+          {% endif %}
+
+          <em>Correct answer:</em><br>
+          {% if q.correct_answer is mapping %}
+            <ul>
+              {% for key, value in q.correct_answer.items() %}
+                <li>{{ key }}: {{ value }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>{{ q.correct_answer }}</p>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="d-flex gap-3">
+    <a href="{{ url_for('quiz') }}" class="btn btn-primary">Retake Quiz</a>
+    <a href="{{ url_for('learn') }}" class="btn btn-secondary">Review Brushes</a>
+    <a href="{{ url_for('procreate') }}" class="btn btn-info">Explore Procreate</a>
   </div>
+</div>
 {% endblock %}

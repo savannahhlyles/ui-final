@@ -200,18 +200,22 @@ def submit_quiz():
     for q in questions:
         qid = str(q['id'])
         ua = user_answers.get(qid)
+
         if q['type'] == 'multiple_choice':
-            correct = (ua.get("selected") == q['answer']) if isinstance(ua, dict) else False
+            correct = isinstance(ua, dict) and ua.get("selected") == q['answer']
+            your_answer = ua.get("selected") if isinstance(ua, dict) else "None"
         else:
-            correct = isinstance(ua, dict) and all(
-                ua.get(k) == v for k, v in q['answer'].items()
-            )
+            correct = isinstance(ua, dict) and all(ua.get(k) == v for k, v in q['answer'].items())
+            # Remove 'locked' key if present
+            your_answer = {k: v for k, v in ua.items() if k != 'locked'} if isinstance(ua, dict) else "None"
+
         if correct:
             score += 1
+
         summary.append({
             'id': q['id'],
             'text': q['text'],
-            'your_answer': ua.get("selected") if isinstance(ua, dict) else ua,
+            'your_answer': your_answer,
             'correct_answer': q['answer'],
             'correct': correct
         })

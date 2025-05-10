@@ -340,13 +340,12 @@ function submitQuiz() {
 function showPopupMessage(text, isCorrect) {
   const popup = document.getElementById('popup-message');
   popup.textContent = text;
-  popup.style.backgroundColor = isCorrect ? '#198754' : '#dc3545'; // green or red
+  popup.style.backgroundColor = isCorrect ? '#5ac493' : '#eb4a44';
   popup.classList.remove('d-none');
   popup.classList.add('show');
 
-  // hide after 2 seconds
   setTimeout(() => {
     popup.classList.remove('show');
     popup.classList.add('d-none');
-  }, 2000);
+  }, 4000);
 }
