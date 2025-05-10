@@ -16,7 +16,7 @@ brushes = [
         "name": "HB Pencil",
         "img": "hb_pencil.png",
         "description": "The HB brush is ideal for sketching due to its natural, pressure-sensitive feel, like a traditional pencil.",
-        "slug": "hb_reveal.png",
+        "slug": "hbpencilsketch.png",
         "messages": [
             "Light Pressure for Construction Line",
             "Hard Pressure for Definition and Proportion",
@@ -28,7 +28,7 @@ brushes = [
         "name": "Oil Pastel",
         "img": "oil.png",
         "description": "Oil Pastel offers smooth blending and vibrant color transitions, mimicking traditional pastel textures.",
-        "slug": "OilPastel_Reveal.png",
+        "slug": "oilpastelsketch.png",
         "messages": [
             "Use for Painterly Texture and Blending",
             "Build Up Color in Layers",
@@ -40,7 +40,7 @@ brushes = [
         "name": "Procreate Pencil",
         "img": "procreate_pencil.png",
         "description": "Procreate Pencil delivers crisp, precise lines perfect for detailed work and fine shading.",
-        "slug": "procreatepencil_reveal.jpeg",
+        "slug": "procreatepencilsketch.png",
         "messages": [
             "Used to Color or Paint your Sketch",
             "Change Opacity to Create Variety in the Precision of Lines",
@@ -52,7 +52,7 @@ brushes = [
         "name": "Narinder Pencil",
         "img": "narinder.png",
         "description": "Narinder Pencil excels at light construction lines and initial form blocking.",
-        "slug": "Narinderpencil_reveal.png",
+        "slug": "narinderpencilsketch.png",
         "messages": [
             "Use for Final Sketch Pass or Line Refinement",
             "Perfect for Confident, Single-Stroke Lines",
@@ -64,7 +64,7 @@ brushes = [
         "name": "6B Pencil",
         "img": "6b.png",
         "description": "6B Pencil provides dark, expressive strokes with rich graphite texture for dramatic shading.",
-        "slug": "6b_reveal.jpeg",
+        "slug": "6Bpencilsketch.png",
         "messages": [
             "Create Loose Lines and Add Texture to Work",
             "Adds a Hand-Drawn Feel to Work",
@@ -76,7 +76,7 @@ brushes = [
         "name": "Peppermint",
         "img": "peppermint.png",
         "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes.",
-        "slug": "Peppermint_reveal.png",
+        "slug": "peppermintpencilsketch.png",
         "messages": [
             "Use for Broad, Expressive Sketches",
             "Adjust Brush Size Mid-Sketch",
