@@ -264,24 +264,23 @@ body {
 
   .big-bold{
     font-weight: bold;
-    color: #000000;
-    font-size: 2.5rem;
+    color: #4d4d4d;
+    font-size: 2rem;
 }
 
 .bordered{
-    background: #cacaca;
+    background: #cacaca00;
     border-radius: 20px;
-    padding: 10px;
     text-align: center;
-    margin-top:50px;
+    margin-top: 25px;
 }
 
 .slide{
     margin-top: 50px;
-    width: 200px;
+    max-width: 800px;
     position: relative;
+    margin-bottom: 25px;
 }
-
 
 @keyframes pulsate {
     0% {
@@ -306,7 +305,6 @@ body {
     border-radius: 10px;
     pointer-events: none;
     z-index: 2;
-
     animation: pulsate 1.5s ease-in-out infinite;
 }
 
@@ -535,6 +533,7 @@ body {
     line-height: 1.1;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 10px;
   }
   
   #review-button {
