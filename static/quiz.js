@@ -118,7 +118,7 @@ function renderQuestion(q) {
     });
     $navWrapper.find('.right-nav').append($nextBtn);
   } else {
-    const $submitQuizBtn = $('<button class="btn btn-success">Submit Quiz</button>');
+    const $submitQuizBtn = $('<button class="btn btn-success" style="border-radius: 22px;">Submit Quiz</button>');
     $submitQuizBtn.on('click', function () {
       submitQuiz();
     });
