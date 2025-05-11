@@ -65,5 +65,12 @@
 
     <!-- Custom JS -->
     <script src="{{ url_for('static', filename='js/learn.js') }}"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.animate-fade-up').forEach(el => {
+          el.style.opacity = '1'; // ensures the animation starts visible
+        });
+      });
+    </script>    
   </body>
 </html>

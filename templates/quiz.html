@@ -4,20 +4,17 @@
 <div id="quiz-root">
   <div class="quiz-start-container">
     <div class="quiz-start-text">
-      <h1 class="quiz-start-heading">🎉 Well done!</h1>
-      <p class="quiz-start-subtext">
-        You’ve successfully completed the learning module and explored the essential tools and techniques.
+      <h1 class="quiz-start-heading animate-fade-up delay-1">🎉 Well done!</h1>
+      <p class="quiz-start-subtext animate-fade-up delay-2">
+        You’ve successfully completed the learning module.
       </p>
-      <p class="quiz-start-subtext">
-        Now it’s time to put your skills to the test — no pressure, just a chance to show what you know.
+      <p class="quiz-start-subtext animate-fade-up delay-3 mb-extra">
+        Now it’s time to put your skills to the test. <span class="cta-gray">Tap the iPad to begin.</span>
       </p>
-      <p class="quiz-start-subtext cta">
-        Tap the iPad to begin.
-      </p>
-      <p class="quiz-start-subtext">
+      <p class="quiz-start-subtext animate-fade-up delay-5">
         Need a quick refresh?
       </p>
-      <a href="/learn" id="review-button" class="btn btn-accent btn-lg shadow">REVIEW</a>
+      <a href="/learn" id="review-button" class="btn btn-accent btn-lg shadow animate-fade-up delay-5">REVIEW</a>
     </div>
 
     <!-- RIGHT: iPad image -->
@@ -31,5 +28,14 @@
 
 <script>
   localStorage.removeItem('userAnswers');
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const pulseEl = document.querySelector('.pulsate');
+    if (pulseEl) {
+      pulseEl.style.animation = 'pulsate 1.5s ease-in-out infinite';
+    }
+  });
 </script>
 {% endblock %}
