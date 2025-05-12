@@ -73,7 +73,7 @@ brushes = [
     },
     {
         "id": 6,
-        "name": "Peppermint",
+        "name": "Peppermint Pencil",
         "img": "peppermint.png",
         "description": "Peppermint responds beautifully to tilt and pressure, perfect for fluid, expressive strokes.",
         "slug": "peppermintpencilsketch.png",

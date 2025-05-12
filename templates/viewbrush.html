@@ -4,16 +4,16 @@
 <div class="container-fluid min-vh-100 position-relative">
   <div class="row">
     <!-- LEFT COLUMN: Brush Info (col-md-3) -->
-    <div class="col-md-3 d-flex align-items-center brush-info-col">
+    <div class="col-md-3 d-flex align-items-center brush-info-col"> 
       <div class="brush-info-box">
-        <div class="d-flex align-items-center mb-3">
+        <div class="d-flex align-items-center mb-4">
           <img src="{{ url_for('static', filename='procreatelogo.png') }}" alt="Procreate Icon" class="brush-icon">
           <h3 class="mb-0 brush-title">{{ brush.name }}</h3>
         </div>
         <div class="mb-3">
           <img src="{{ url_for('static', filename='media/' + brush.img) }}" alt="{{ brush.name }}" class="img-fluid rounded shadow-sm">
         </div>
-        <p class="brush-description">{{ brush.description }}</p>
+        <p class="brush-description">{{ brush.description }}</p>       
       </div>
     </div>
 
@@ -35,15 +35,17 @@
       >
     </div>
 
-    <!-- RIGHT COLUMN: Progress + Info Boxes (col-md-3) -->
-    <div class="col-md-3 d-flex flex-column align-items-center mt-5" id="info-column">
-      <span id= "progress-text"> Brush Tips ⭐</span>
-      <div class="progress-bar-container mb-4">
-        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        <!-- RIGHT COLUMN: Progress + Info Boxes (col-md-3) -->
+        <div class="col-md-3 d-flex flex-column align-items-center mt-5" id="info-column">
+          <span id= "progress-text"> Brush Tips ⭐</span>
+          <div class="progress-bar-container mb-4">
+            <div id="progress-bar-fill" class="progress-bar-fill"></div>
+          </div>
+          <div id="info-boxes" class="w-100 d-flex flex-column gap-3"></div>
+        </div>
       </div>
-      <div id="info-boxes" class="w-100 d-flex flex-column gap-3"></div>
-    </div>
-  </div>
+    
+
 
   <!-- RETURN BUTTONS -->
   <a href="{{ url_for('learn') }}" class="btn btn-info return-btn-fixed">RETURN TO BRUSHES</a>
