@@ -101,7 +101,7 @@ questions = [
         "id": 1,
         "type": "multiple_choice",
         "text": "Which brush is used in the shown clip?",
-        "options": ["Narinder Pencil", "Peppermint", "6B Pencil", "Oil Pastel"],
+        "options": ["Narinder Pencil", "Peppermint Pencil", "6B Pencil", "Oil Pastel"],
         "answer": "Oil Pastel"
     },
     {
@@ -134,14 +134,14 @@ questions = [
             {"text": "Bold, painterly sketches",              "drop_id": "match3"},
             {"text": "Confident sketching or clean linework", "drop_id": "match4"}
         ],
-        "options": ["Peppermint", "HB Pencil", "Oil Pastel", "Narinder Pencil"],
-        "answer": {"match1": "Peppermint", "match2": "HB Pencil", "match3": "Oil Pastel", "match4": "Narinder Pencil"}
+        "options": ["Peppermint Pencil", "HB Pencil", "Oil Pastel", "Narinder Pencil"],
+        "answer": {"match1": "Peppermint Pencil", "match2": "HB Pencil", "match3": "Oil Pastel", "match4": "Narinder Pencil"}
     },
     {
         "id": 5,
         "type": "multiple_choice",
         "text": "You’re sketching a rough pose and want the brush to respond well to tilt for expressive lines. Which brush do you choose?",
-        "options": ["HB Pencil", "Oil Pastel", "Narinder Pencil", "Peppermint"],
+        "options": ["HB Pencil", "Oil Pastel", "Narinder Pencil", "Peppermint Pencil"],
         "answer": "Peppermint"
     },
     {
