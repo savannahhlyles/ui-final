@@ -11,7 +11,8 @@ function buildInterfaceUI(){
     if(loaded_slide.id === 1){
         new_slide = `
         <div class="row">
-            <div class="big-bold bordered col-md-12">${loaded_slide.title}</div>
+         <div class="big-bold bordered interface-heading-border">${loaded_slide.title}</div>
+
             <div class="col-md-12 row d-flex justify-content-center align-items-center">
                 <div class="col-md-2 arrow">
                 </div>
@@ -29,7 +30,7 @@ function buildInterfaceUI(){
     }else if(loaded_slide.id === 5){
         new_slide = `
         <div class="row">
-            <div class="big-bold bordered col-md-12">${loaded_slide.title}</div>
+            <div class="big-bold bordered interface-heading-border">${loaded_slide.title}</div>
             <div class="col-md-12 row d-flex justify-content-center align-items-center">
                 <div class="col-md-2 arrow">
                     <a href="/procreate/${loaded_slide.id - 1}">
@@ -47,7 +48,7 @@ function buildInterfaceUI(){
     }else {
         new_slide = `
         <div class="row">
-            <div class="big-bold bordered col-md-12">${loaded_slide.title}</div>
+            <div class="big-bold bordered interface-heading-border">${loaded_slide.title}</div>
             <div class="col-md-12 row d-flex justify-content-center align-items-center">
                 <div class="col-md-2 arrow">
                     <a href="/procreate/${loaded_slide.id - 1}">
