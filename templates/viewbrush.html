@@ -32,6 +32,8 @@
         alt="Apple Pencil"
         draggable="true"
         class="apple-pencil mt-3"
+        data-toggle="tooltip"
+        title="Drag the pencil to the iPad"
       >
     </div>
 
@@ -65,6 +67,10 @@
       'peppermint': '{{ url_for("static", filename="media/demos/Peppermint_reveal.png") }}',
       'procreate_pencil': '{{ url_for("static", filename="media/demos/procreatepencil_reveal.jpeg") }}'
     };
+
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    });
   </script>
 
   <!-- Main brush interaction script -->
