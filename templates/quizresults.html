@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container py-5">
-  <div class="row custom-marg-left">
+  <div class="row justify-content-center">
     <!-- LEFT: iPad-style results -->
     <div class="col-md-6 d-flex justify-content-center">
       <div class="ipad-frame-result text-center p-4 w-100">
@@ -11,25 +11,48 @@
         <hr>
         <div class="result-list text-left mt-4">
           {% for q in summary %}
-            <div class="question-result mb-2">
-              <strong>Question {{ q.id }}:</strong>
-              {% if q.correct %}
-                <span class="text-success result-icon">✅</span>
-              {% else %}
-                <span class="text-danger result-icon">❌</span>
-              {% endif %}
+            <div class="question-result mb-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <strong>Question {{ q.id }}:</strong>
+                {% if q.correct %}
+                  <span class="text-success result-icon">✅</span>
+                {% else %}
+                  <span class="text-danger result-icon">❌</span>
+                {% endif %}
+              </div>
+
+              <!-- Question text -->
+              <div class="text-muted small mt-1">
+                {{ q.text }}
+              </div>
+
+              <!-- Correct answer -->
+              <div class="small mt-1">
+                <strong>Correct Answer:</strong>
+                {% if q.correct_answer is mapping %}
+                  <ul class="mb-0">
+                    {% for key, value in q.correct_answer.items() %}
+                      <li>{{ key }}: {{ value }}</li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  {{ q.correct_answer }}
+                {% endif %}
+              </div>
             </div>
           {% endfor %}
         </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: Buttons -->
-    <div class="col-md-6 d-flex flex-column justify-content-center align-items-start">
+            <!-- RIGHT: Buttons -->
+    <div class="col-md-12 d-flex flex-column justify-content-center align-items-center" id ="buttons-quiz">
       <a href="{{ url_for('learn') }}" class="btn btn-accent btn-lg mb-3">REVIEW BRUSHES</a>
       <a href="{{ url_for('quiz') }}" class="btn btn-accent btn-lg mb-3">RETAKE QUIZ</a>
       <a href="{{ url_for('procreate') }}" class="btn btn-accent btn-lg">PROCREATE INTERFACE</a>
     </div>
+      </div>
+  
+    </div>
+
+
   </div>
 </div>
 {% endblock %}
