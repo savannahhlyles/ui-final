@@ -667,6 +667,9 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
   animation-delay: 1.1s;
 }
 
+.custom-marg-left {
+  margin-left: 10%;
+}
 
 /* quiz results */
 .ipad-frame-result {
