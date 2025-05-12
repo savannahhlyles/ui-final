@@ -24,7 +24,7 @@ function renderQuestion(q) {
   
   if (q.img) {
     $root.append(`<div class="text-center mb-4">
-      <img src="${q.img}" alt="Question image" class="img-fluid rounded shadow">
+      <img src="${q.img}" alt="Question image" class="img-fluid rounded shadow" style="max-width: 320px;">
     </div>`);
   }
 

@@ -1,54 +1,35 @@
 {% extends "layout.html" %}
+
 {% block content %}
 <div class="container py-5">
-  <h1>Your Score: {{ score }}/{{ total }}</h1>
-  <hr>
-  <h3>Quiz Summary</h3>
-  <ul class="list-group mb-4">
-    {% for q in summary %}
-      <li class="list-group-item d-flex flex-column {% if q.correct %}list-group-item-success{% else %}list-group-item-danger{% endif %}">
-        <div class="d-flex justify-content-between align-items-start">
-          <strong>{{ q.id }}. {{ q.text }}</strong>
-          <span class="fs-4">
-            {% if q.correct %}
-              ✅
-            {% else %}
-              ❌
-            {% endif %}
-          </span>
+  <div class="row">
+    <!-- LEFT: iPad-style results -->
+    <div class="col-md-6 d-flex justify-content-center">
+      <div class="ipad-frame-result text-center p-4 w-100">
+        <h2 class="score-label">Your Score</h2>
+        <h1 class="score-value">{{ score }}<span class="score-total">/ {{ total }}</span></h1>
+        <hr>
+        <div class="result-list text-left mt-4">
+          {% for q in summary %}
+            <div class="question-result mb-2">
+              <strong>Question {{ q.id }}:</strong>
+              {% if q.correct %}
+                <span class="text-success result-icon">✅</span>
+              {% else %}
+                <span class="text-danger result-icon">❌</span>
+              {% endif %}
+            </div>
+          {% endfor %}
         </div>
+      </div>
+    </div>
 
-        <div class="mt-2">
-          <em>Your answer:</em><br>
-          {% if q.your_answer is mapping %}
-            <ul class="mb-2">
-              {% for key, value in q.your_answer.items() %}
-                <li>{{ key }}: {{ value }}</li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>{{ q.your_answer }}</p>
-          {% endif %}
-
-          <em>Correct answer:</em><br>
-          {% if q.correct_answer is mapping %}
-            <ul>
-              {% for key, value in q.correct_answer.items() %}
-                <li>{{ key }}: {{ value }}</li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p>{{ q.correct_answer }}</p>
-          {% endif %}
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <div class="d-flex gap-3" id="quiz-results-buttons">
-    <a href="{{ url_for('quiz') }}" class="btn btn-grey">Retake Quiz</a>
-    <a href="{{ url_for('learn') }}" class="btn btn-darkgrey">Review Brushes</a>
-    <a href="{{ url_for('procreate') }}" class="btn btn-blue">Explore Procreate</a>
-  </div>  
+    <!-- RIGHT: Buttons -->
+    <div class="col-md-6 d-flex flex-column justify-content-center align-items-start">
+      <a href="{{ url_for('learn') }}" class="btn btn-accent btn-lg mb-3">REVIEW BRUSHES</a>
+      <a href="{{ url_for('quiz') }}" class="btn btn-accent btn-lg mb-3">RETAKE QUIZ</a>
+      <a href="{{ url_for('procreate') }}" class="btn btn-accent btn-lg">PROCREATE INTERFACE</a>
+    </div>
+  </div>
 </div>
 {% endblock %}
