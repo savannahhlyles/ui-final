@@ -669,7 +669,7 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
   border-radius: 35px;
   border: 12px solid black;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  min-width: 750px;
+  min-width: 950px;
 }
 
 #brush-button {
@@ -741,3 +741,18 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
 #buttons-quiz {
   padding-left: 320px;
 }
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* This should space them out horizontally */
+  flex-wrap: wrap; /* Optional: makes them wrap on small screens */
+}
+
+.button-row a {
+  margin-right: 20px;
+}
+.button-row a:last-child {
+  margin-right: 0;
+}
+

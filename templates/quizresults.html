@@ -43,11 +43,14 @@
           {% endfor %}
         </div>
             <!-- RIGHT: Buttons -->
-    <div class="col-md-12 d-flex flex-column justify-content-center align-items-center" id ="buttons-quiz">
-      <a href="{{ url_for('learn') }}" class="btn btn-accent btn-lg mb-3">REVIEW BRUSHES</a>
-      <a href="{{ url_for('quiz') }}" class="btn btn-accent btn-lg mb-3">RETAKE QUIZ</a>
-      <a href="{{ url_for('procreate') }}" class="btn btn-accent btn-lg">PROCREATE INTERFACE</a>
-    </div>
+            <div class="button-row">
+              <div class="d-flex flex-row gap-3 flex-wrap justify-content-center">
+                <a href="{{ url_for('learn') }}" class="btn btn-accent btn-lg me-3">REVIEW BRUSHES</a>
+                <a href="{{ url_for('quiz') }}" class="btn btn-accent btn-lg">RETAKE QUIZ</a>
+                <a href="{{ url_for('procreate') }}" class="btn btn-accent btn-lg">PROCREATE INTERFACE</a>
+              </div>
+            </div>
+            
       </div>
   
     </div>
