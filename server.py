@@ -142,7 +142,7 @@ questions = [
         "type": "multiple_choice",
         "text": "You’re sketching a rough pose and want the brush to respond well to tilt for expressive lines. Which brush do you choose?",
         "options": ["HB Pencil", "Oil Pastel", "Narinder Pencil", "Peppermint Pencil"],
-        "answer": "Peppermint"
+        "answer": "Peppermint Pencil"
     },
     {
         "id": 6,
