@@ -677,6 +677,12 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
   max-width: 350px;
 }
 
+#brush-button {
+  padding: 0.5rem !important;
+  margin: 0 !important;
+
+}
+
 .score-label {
   color: #bbb;
   font-weight: 600;
@@ -716,4 +722,11 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
 .btn-accent:hover {
   background-color: #5cc1c3;
   transform: translateY(-2px);
+}
+
+
+@media (max-width: 768px) {
+  .brush-tile {
+    width: 100%;
+  }
 }
