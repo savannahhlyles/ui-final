@@ -671,10 +671,10 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
 /* quiz results */
 .ipad-frame-result {
   background: white;
-  border-radius: 40px;
-  border: 8px solid black;
+  border-radius: 35px;
+  border: 12px solid black;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  max-width: 450px;
+  max-width: 350px;
 }
 
 .score-label {
