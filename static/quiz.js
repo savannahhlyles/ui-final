@@ -286,31 +286,34 @@ function renderFillBlanks(q, $root) {
   const locked = window.userAnswers[q.id]?.locked;
   const currentAnswers = window.userAnswers[q.id] || {};
 
-  // Render sentences with placeholders like {{drop1}}
+  // Render sentences
   q.sentences.forEach(s => {
     const prev = currentAnswers[s.drop_id] || '';
     const dropHTML = `<span id="${s.drop_id}" class="drop-zone">${prev}</span>`;
-    const safeText = s.text.replace(`{{${s.drop_id}}}`, dropHTML);
-    const $p = $('<p>').html(safeText);
-    $root.append($p);
+    const sentenceHTML = s.text.replace(
+      `<div id='${s.drop_id}' class='drop-zone'></div>`,
+      dropHTML
+    );
+    $root.append(`<p>${sentenceHTML}</p>`);
   });
 
-  // Create the word bank container
+  // Build the word bank with only unused options
+  const usedWords = Object.values(currentAnswers);
   const $bank = $('<div class="draggable-container" id="word-bank"></div>');
   $bank.append(`<h5 class="word-bank-header text-center w-100 mb-3">WORD BANK</h5>`);
 
-  const used = Object.values(currentAnswers);
   q.options.forEach(opt => {
-    if (!used.includes(opt)) {
+    if (!usedWords.includes(opt)) {
       const $opt = $(`<span class="draggable btn btn-outline-secondary me-1 mb-2" draggable="true">${opt}</span>`);
       if (locked) $opt.attr('draggable', false).addClass('disabled');
       $bank.append($opt);
     }
   });
 
-  $root.append($bank); // ⬅ Append to $root, not body
+  $root.append($bank);
   bindFillEvents(q, $root);
 }
+
 
 function bindFillEvents(q, $root) {
   const locked = window.userAnswers[q.id]?.locked;
