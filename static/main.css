@@ -5,12 +5,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Inter';
-  src: url('/static/fonts/Inter.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 #popup-message.show {
     display: block !important;
@@ -22,7 +16,7 @@
   
 body {
   background-color: #f8f6f5; 
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -70,8 +64,6 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
     color: #76d7db !important; 
   }
   
-
-
   .btn-accent {
     background-color: #76e0df;
     color: white;
@@ -295,6 +287,7 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
     font-weight: bold;
     color: #4d4d4d;
     font-size: 2rem;
+    border: 10px;
 }
 
 .bordered{
@@ -732,4 +725,8 @@ h1, h2, h3, .navbar-brand, .big-bold, .quiz-start-heading {
   .brush-tile {
     width: 100%;
   }
+}
+
+* {
+  font-family: inherit;
 }
