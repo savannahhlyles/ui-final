@@ -1,4 +1,4 @@
-# COMS W4170 Final Project
+# COMS W4170 Final Project -> Creating a website to teach a topic in 10 minutes!
 Ceyda, Meryem, Savannah, Fawzi
 Brush Up: Brush Techniques in Procreate
 Add a javascript  file for the learn page. 
