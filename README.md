@@ -5,14 +5,14 @@
 
 ## How to Run the Project Locally
 
-1. **Clone the repository**
-   git clone https://github.com/savannahhlyles/ui-final.git
-   cd ui-final
+1. **Clone the repository**<br>
+   git clone https://github.com/savannahhlyles/ui-final.git<br>
+   cd ui-final  
 
-2. **Run the Flask server**
+2. **Run the Flask server**<br>
    python server.py
 
-4. **Open the site in your browser**
+4. **Open the site in your browser**<br>
    Go to: [http://127.0.0.1:5001/](http://127.0.0.1:5001/)
 
 ## Authors
