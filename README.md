@@ -1,8 +1,25 @@
-# COMS W4170 Final Project -> Creating a website to teach a topic in 10 minutes!
-Ceyda, Meryem, Savannah, Fawzi
-Brush Up: Brush Techniques in Procreate
-Add a javascript  file for the learn page. 
+# Brush Up  
+*COMS W4170 Final Project — "Teach a Topic in 10 Minutes"*
 
-1. To run our code, clone this repo on your own device and cd into ui-final and in your terminal, type python server.py
+**Brush Up** is a short interactive website designed to teach brush techniques in **Procreate**. The site combines instructional content with interactive visualizations to help beginners quickly understand key brush workflows.
 
-2. To see our website, type http://127.0.0.1:5001/ into your browser.
+## How to Run the Project Locally
+
+1. **Clone the repository**
+   git clone https://github.com/savannahhlyles/ui-final.git
+   cd ui-final
+
+2. **Run the Flask server**
+   python server.py
+
+4. **Open the site in your browser**
+   Go to: [http://127.0.0.1:5001/](http://127.0.0.1:5001/)
+
+## Authors
+
+- Ceyda Topcu
+- Meryem Khadrouni
+- Savannah Lyles
+- Fawzi Hajj-Chahine
+
+Project for **COMS W4170: User Interface Design**, Columbia University.
